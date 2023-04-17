@@ -1,0 +1,36 @@
+.header{
+    height: 60px;
+    background-color: var(--wihte);
+    display: flex;
+    justify-content: flex-end;
+    margin-right:40px ;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.Not_Time{
+    display: flex;
+}
+.time_date{
+    height: 70%;
+    padding: 7px 7px 7px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--lightBlue);
+    border-radius: 50px;
+}
+.time_date span{
+    color:#447695;
+}
+.time{
+    display: flex;
+    flex-direction: column;
+}
+.not{
+    font-size: 40px;
+    padding: 10px 10px 10px 10px;
+}
+.clock{
+    font-size: 35px;
+    margin-top: 4px;
+}
