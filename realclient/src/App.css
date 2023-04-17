@@ -1,0 +1,19 @@
+:root{
+    --white:#fafafa;
+    --gray:#f6f6f6;
+    --lightBlue:#d0e9e7;
+    --darkBlue:#447695
+}
+
+
+.App{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+.right_side{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}

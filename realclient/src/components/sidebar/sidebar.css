@@ -1,1 +1,64 @@
-/* opiuytfghj */
+.Side_bar{
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #f6f6f6;
+    flex-direction: column;
+}
+.side_links{
+    width: 100%;
+    display:flex;
+    flex-direction:column;
+    gap: 35px;
+    width: 70%;
+}
+.navlink {
+    text-decoration: none;
+    color: black;   
+}
+.each_link{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.side_top{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Dc_info{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+.image_containt{
+    height: 150px;
+    width: 150px;
+
+}
+.image_containt img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.base_bar{
+    width: 70%;
+    height: 20%;
+    display: flex;
+    align-items: flex-end;
+    font-size: 40px;
+}
+.logout{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
