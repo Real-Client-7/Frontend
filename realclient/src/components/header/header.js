@@ -19,7 +19,6 @@ function getminutes(){
 
 function Header () {
 
-
     useEffect(()=>{
         gethours()
         getminutes()
