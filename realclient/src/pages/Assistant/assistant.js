@@ -1,6 +1,6 @@
 function Assistant() {
     return ( <>
-    assistant
+    assistants
     </>);
 }
 
