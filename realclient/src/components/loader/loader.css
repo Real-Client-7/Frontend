@@ -1,0 +1,30 @@
+.loader-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 75%);
+    font-size: 200px;
+    color: #369cab;
+}
+.loader {
+display: inline-block;
+width: 1em;
+height: 1em;
+color: inherit;
+vertical-align: middle;
+pointer-events: none;
+border: 28px solid currentcolor;
+border-bottom-color: transparent;
+border-radius: 50%;
+animation: 1s loader-03 linear infinite;
+position: relative;
+}
+
+@keyframes loader-03 {
+0% {
+    transform: rotate(0deg);
+}
+
+100% {
+    transform: rotate(360deg);
+}
+}
