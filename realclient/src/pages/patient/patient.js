@@ -21,7 +21,7 @@ function createData(id, name, about, created_at, updated_at) {
   };
 }
 
-function Kpi(props) {
+function Patient(props) {
   const [Loading, setLoading] = useState(true);
   const [Data, setData] = useState([]);
   const [editingRow, setEditingRow] = useState(null);
@@ -30,20 +30,31 @@ function Kpi(props) {
 
   useEffect(() => {
     setLoading(true);
-    document.title = "Kpis";
+    document.title = "Patients";
     getData();
   }, []);
 
-  function openKpiPopup() {
-    document.querySelector(".kpi-popup").showModal();
+  function openPatientPopup() {
+    document.querySelector(".patient-popup").showModal();
   }
   const rows =
     Data ||
     [].map((item) =>
       createData(
-        item.id,
-        item.name,
-        item.about,
+        item.first_name,
+        item.middle_name,
+        item.last_name,
+        item.email,
+        item.mobile,
+        item.dob,
+        item.gender,
+        item.maritalStatus,
+        item.occupation,
+        item.address,
+        item.referredBY,
+        item.notes,
+        item.medicalStatus,
+        item.appointments,
         item.created_at,
         item.updated_at
       )
@@ -56,7 +67,7 @@ function Kpi(props) {
   const handleDelete = (rowsDeleted) => {
     const token = Cookies.get("token");
     axios
-      .delete(`http://127.0.0.1:8000/api/deletekpi/${rowsDeleted}`, {
+      .delete(`http://127.0.0.1:8000/patient/deletePatient/:id/${rowsDeleted}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -73,7 +84,7 @@ function Kpi(props) {
   const getData = () => {
     const token = Cookies.get("token");
     axios
-      .get("http://127.0.0.1:8000/api/getAllkpi", {
+      .get("http://127.0.0.1:8000/patient/getAllPatients", {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -94,10 +105,22 @@ function Kpi(props) {
     const token = Cookies.get("token");
     axios
       .patch(
-        `http://127.0.0.1:8000/api/editKpi/${rowData[0]}`,
+        `http://127.0.0.1:8000/patient/editPatient/:id/${rowData[0]}`,
         {
-          name: rowData[1],
-          about: rowData[2],
+          first_name: rowData[1],
+          middle_name: rowData[2],
+          last_name: rowData[3],
+          email: rowData[4],
+          mobile: rowData[5],
+          dob: rowData[6],
+          gender: rowData[7],
+          maritalStatus: rowData[8],
+          occupation: rowData[9],
+          referredBY: rowData[10],
+          notes: rowData[11],
+          medicalStatus: rowData[12],
+          appointments: rowData[13],
+
         },
         {
           headers: {
@@ -130,17 +153,15 @@ function Kpi(props) {
       },
     },
     {
-      name: "name",
-      label: "Name",
+      name: "first_name",
+      label: "First Name",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div
-              style={{ textAlign: "center" }}
-            >
+            <div style={{ textAlign: "center" }}>
               {isEditing ? (
                 <input
                   className="EditInput"
@@ -159,17 +180,41 @@ function Kpi(props) {
       },
     },
     {
-      name: "about",
-      label: "About",
+      name: "last_name",
+      label: "Last Name",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           const rowIndex = tableMeta.rowIndex;
           const isEditing = rowIndex === editingRow;
 
           return (
-            <div
-              style={{ textAlign: "center" }}
-            >
+            <div style={{ textAlign: "center" }}>
+              {isEditing ? (
+                <input
+                  className="EditInput"
+                  value={value}
+                  onChange={(e) => {
+                    updateValue(e.target.value);
+                  }}
+                />
+              ) : (
+                value
+              )}
+            </div>
+          );
+        },
+        editable: true,
+      },
+    },{
+      name: "mobile",
+      label: "Mobile",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          const rowIndex = tableMeta.rowIndex;
+          const isEditing = rowIndex === editingRow;
+
+          return (
+            <div style={{ textAlign: "center" }}>
               {isEditing ? (
                 <input
                   className="EditInput"
@@ -317,10 +362,10 @@ function Kpi(props) {
                         transition: "0.2s ease-out",
                       },
                     }}
-                    className="addkpi"
-                    onClick={openKpiPopup}
+                    className="addpatient"
+                    onClick={openPatientPopup}
                   />{" "}
-                  <span className="kpititle">Kpis</span>
+                  <span className="Patienttitle">Patient</span>
                 </div>
               }
               data={rows}
@@ -343,4 +388,4 @@ function Kpi(props) {
     </>
   );
 }
-export default Kpi;
+export default Patient;
