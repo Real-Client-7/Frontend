@@ -1,6 +1,7 @@
-function Patient() {
-    return ( <>
-    patient</> );
-}
+import React from 'react'
 
-export default Patient;
+export default function patient() {
+  return (
+    <div>patient</div>
+  )
+}
