@@ -9,6 +9,7 @@ import Dashboard from "../src/pages/Dashboard/dashboard"
 import Transaction from "../src/pages/transaction/transaction"
 import Patient from "../src/pages/patient/patient"
 import Login from "../src/components/login/login"
+// import Table from './components/table/table';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

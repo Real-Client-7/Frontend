@@ -4,7 +4,11 @@
     --lightBlue:#d0e9e7;
     --darkBlue:#447695
 }
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;1,600&display=swap');
 
+*{
+    font-family: Raleway;
+}
 
 .App{
     margin: 0 auto;

@@ -8,12 +8,12 @@ function App() {
   return (
     <div className="App">
       <SideBar/>
-      <div className='right_side'>
-      <Header/>
-      <div style={{margin : "20px 20px 20px 20px" , height:"100%"}}>
-      <Outlet/>
-      </div>
-      </div>
+          <div className='right_side'>
+            <Header/>
+              <div style={{margin : "20px 20px 20px 20px" , height:"100%"}}>
+                <Outlet/>
+              </div>
+          </div>
     </div>
   );
 }
