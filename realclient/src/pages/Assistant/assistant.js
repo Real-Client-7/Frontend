@@ -10,7 +10,6 @@ import TableContainer from "@mui/material/TableContainer";
 import Button from "@mui/material/Button";
 import Edit from "@mui/icons-material/Edit";
 import Delete from "@mui/icons-material/Delete";
-// import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function Assistants() {
   const assistant = [
@@ -62,22 +61,6 @@ function Assistants() {
         <h2 className="title">Assistants</h2>
       </div>
       <TableContainer component={Paper}>
-        {/* <Button
-          startIcon={<AddCircleIcon />}
-          style={{
-            fontSize: 12,
-            backgroundColor: "#369fff",
-            color: "white",
-            left: 1150,
-            marginBottom: "0.5%",
-          }}
-          size="large"
-          // onClick={() => alert("You can now add a Assistants")}
-          variant="contained"
-        >
-          Add
-        </Button> */}
-
         <Table className="tableall" aria-label="assistant table">
           <TableHead>
             <TableRow>
@@ -127,16 +110,6 @@ function Assistants() {
                 <TableCell align="center" className="MuiTableCell-root">
                   {Assistants.schedule}
                 </TableCell>
-                {/* <TableCell align="center" className="MuiTableCell-root">
-                  <Button
-                    sx={{
-                      color: "#333",
-                      "&:hover": { color: "darkblue" },
-                    }}
-                  >
-                    Age
-                  </Button>
-                </TableCell> */}
                 <TableCell align="center" className="MuiTableCell-root">
                   <Button
                     sx={{
