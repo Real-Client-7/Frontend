@@ -1,1 +1,55 @@
-/* kjhghjkl; */
+.heder-of-page{
+    width: 96.8%;
+    height: 75px ;
+    background-color: var(--white);
+    margin: 20px;
+    border-radius: 20px ;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.transaction{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.heder-tools{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 100px;
+    align-items: center;
+}
+.heder-tools select{
+    border: transparent;
+    transition: all 0.4s;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+}
+.tabels-transaction{
+    width: 96.8%;
+    height: 37.5rem;
+    background-color: var(--white);
+    margin: 20px;
+    margin-top: 5px;
+    border-radius: 20px;
+    transition: all 1s;
+}
+.heder-tools select option {
+    color: var(--darkBlue);
+    font-size: 20px;
+}
+.heder-tools select{
+    padding: 6px;
+    font-size: 23px;
+    color: var(--darkBlue);
+    background-color: var(--lightBlue);
+    width: max-content;
+
+}
+.heder-tools span {
+    font-size: 35px;
+    color: var(--darkBlue);
+    margin-left: 20px;
+}

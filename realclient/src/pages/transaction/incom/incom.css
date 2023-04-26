@@ -1,0 +1,54 @@
+
+.income_table{
+    display: flex;
+    height: 598px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
+}
+.table_mui{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.none {
+   width: 0;
+   transition: 1s all;
+}
+
+.incomss{
+    display: flex;
+    flex-direction: row;
+}
+.form-add-income{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s;
+}
+
+.form-add-income form{
+    width: 70%;
+    padding: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.head-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.head-form button{
+    height: 40px;
+    border: transparent;
+    background-color: transparent;
+    color: var(--darkBlue);
+    font-size: 30px;
+}
+
