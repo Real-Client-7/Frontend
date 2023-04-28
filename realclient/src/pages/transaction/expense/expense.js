@@ -271,7 +271,7 @@ console.log(Id)
                 x
               </button>
             </div>
-            <label htmlFor="title"> Describtion</label>
+            <label htmlFor="title"> Description</label>
             <TextField
               type="text"
               name="description"
