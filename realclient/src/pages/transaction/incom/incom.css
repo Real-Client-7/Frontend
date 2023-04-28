@@ -18,7 +18,7 @@
 
 .incomss{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 .form-add-income{
     width: 70%;
