@@ -33,8 +33,6 @@ function Expense() {
   const [iconEdit, isShowIcon] = useState(true);
   const [iconAdd, isShowIconAdd] = useState(true);
 
-
-
   const showAdd = () => {
     if (visibleAdd === false) {
       isShowAdd(true);
@@ -57,23 +55,6 @@ function Expense() {
     iconAdd ? isShowIconAdd(false) : isShowIconAdd(true);
   };
 
-  const questionAlert = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#447695',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!' 
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handelDelete(Id);
-      }
-    })
-}
-
-
   const options = {
     filterType: "checkbox",
     responsive: "simple",
@@ -87,33 +68,6 @@ function Expense() {
     loaded: true,
     rowsPerPageOptions: [5], // this to specifique rows in page
   };
-
-  const handelDelete = (id) => {
-    axios
-      .delete(`http://localhost:4600/expense/${id}`)
-      .then((response) => {
-        console.log(response.data.message);
-        getData();
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
-  const getDataByid = (id) => {
-    axios
-      .get(`http://localhost:4600/expense/${id}`)
-      .then((response) => {
-        setDataById(response.data.response);
-        console.log(response.data.response);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
-
-
   const columns = [
     {
       name: "_id",
@@ -148,12 +102,18 @@ function Expense() {
                 <Button
                   sx={{ height: "40px" }}
                   onClick={() => {
-                    setId(tableMeta.rowData[0]);
-                    show();
-                    showiconAdd();
-                    showEdit();
-                    getDataByid(tableMeta.rowData[0]);
-                    
+                    axios
+                    .get(`http://localhost:4600/expense/${tableMeta.rowData[0]}`)
+                    .then((response) => {
+                      setDataById(response.data.response);
+                      setId(tableMeta.rowData[0]);
+                      show();
+                      showiconAdd();
+                      showEdit();
+                    })
+                    .catch((err) => {
+                      console.log(err.message);
+                    });
                   }}
                 >
                   <AiFillEdit />
@@ -162,8 +122,27 @@ function Expense() {
               <Button
                 sx={{ height: "40px" }}
                 onClick={() => {
-                  setId(tableMeta.rowData[0]);
-                  questionAlert()
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#447695',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!' 
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      axios
+                      .delete(`http://localhost:4600/expense/${tableMeta.rowData[0]}`)
+                      .then((response) => {
+                        console.log(response.data.message);
+                        getData();
+                      })
+                      .catch((err) => {
+                        console.log(err.message);
+                      });
+                    }
+                  })
                 }}
               >
                 <MdDelete/>
@@ -188,7 +167,6 @@ console.log(Id)
 
   useEffect(() => {
     getData();
-    getDataByid();
   }, []);
 
   const postData = () => {
@@ -252,7 +230,7 @@ console.log(Id)
     }
   }
 
-  if (!Data && Id===undefined) return <Loader />;
+  if (!Data) return <Loader />;
   return (
     <div className="incomss">
       <div className="none">
@@ -318,12 +296,12 @@ console.log(Id)
               type="text"
               name="description"
               onChange={handelChangeEdit}
-              placeholder={DataById.description}
+              defaultValue={DataById.description}
             />
             <label htmlFor="amount"> Amount</label>
-            <TextField type="number" name="amount" placeholder={DataById.amount} onChange={handelChangeEdit} />
+            <TextField type="number" name="amount" defaultValue={DataById.amount} onChange={handelChangeEdit} />
             <label htmlFor="date"> Date</label>
-            <TextField type="date" name="date" placeholder={DataById.date} onChange={handelChangeEdit} />
+            <TextField type="date" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
             <Button variant="outlined" onClick={EditData}>
               Edit Expense
             </Button>
