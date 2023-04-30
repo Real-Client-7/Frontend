@@ -21,3 +21,13 @@
     height: 100vh;
     width: 100%;
 }
+
+@media only screen and (max-width: 600px) {
+    .Header{
+        display: none;
+    }
+    .App{
+        display: flex;
+        flex-direction: column;
+    }
+  }
