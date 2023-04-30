@@ -113,3 +113,47 @@
     right: -20px;
     top: 30px;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .Dc_info{
+        display: none;
+    }
+    .Side_bar{
+        height: 40px;
+        width: 90%;
+    }
+    .side_top{
+        display: none;
+    }
+    .side_links{
+        height: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        align-items: center;
+    }
+    .each_link{
+        width:60px; 
+    height: 15px;
+font-size: 10px;
+display: flex;
+justify-content: center;}
+
+    .navlink{
+        padding: 1px;
+        margin-left: 0;
+    }
+    .title-Side{
+        display: none;
+    }
+
+    .base_bar{
+        display: none;
+    }
+    .arrow-btn{
+        display: none;
+    }
+  }
+  

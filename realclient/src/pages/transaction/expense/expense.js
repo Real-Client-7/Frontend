@@ -1,14 +1,16 @@
 import MUIDataTable from "mui-datatables";
 import "../incom/incom.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../../components/loader/loder";
 import Swal from "sweetalert2"
+import { Url } from "../../../App";
 
 function Expense() {
+  const URL =useContext(Url)
   const [Data, setData] = useState(null);
   const [DataById, setDataById] = useState({
     description: "",
@@ -103,7 +105,7 @@ function Expense() {
                   sx={{ height: "40px" }}
                   onClick={() => {
                     axios
-                    .get(`http://localhost:4600/expense/${tableMeta.rowData[0]}`)
+                    .get(`${URL}/expense/${tableMeta.rowData[0]}`)
                     .then((response) => {
                       setDataById(response.data.response);
                       setId(tableMeta.rowData[0]);
@@ -133,7 +135,7 @@ function Expense() {
                   }).then((result) => {
                     if (result.isConfirmed) {
                       axios
-                      .delete(`http://localhost:4600/expense/${tableMeta.rowData[0]}`)
+                      .delete(`${URL}/expense/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         console.log(response.data.message);
                         getData();
@@ -156,7 +158,7 @@ function Expense() {
 console.log(Id)
   const getData = () => {
     axios
-      .get("http://localhost:4600/expense/")
+      .get(`${URL}/expense/`)
       .then((response) => {
         setData(response.data.response);
       })
@@ -164,22 +166,10 @@ console.log(Id)
         console.log(err.message);
       });
   };
-
+console.log(DataById)
   useEffect(() => {
     getData();
   }, []);
-
-  const postData = () => {
-    axios
-      .post("http://localhost:4600/expense/", DataPost)
-      .then((res) => {
-        console.log(res);
-        getData();
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
 
   const handelChangePost = (e) => {
     const value = e.target.value;
@@ -192,7 +182,7 @@ console.log(Id)
 
   const EditData = () => {
     axios
-      .put(`http://localhost:4600/expense/${Id}`, DataEdit)
+      .put(`${URL}/expense/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
         getData();
@@ -210,25 +200,6 @@ console.log(Id)
       [e.target.name]: value,
     });
   };
-
-
-  const checkDataAndPost = () =>  {
-    if (DataPost.description === "" || DataPost.amount=== "" || DataPost.date === ""){
-      Swal.fire({
-        title: 'field is Empty !',
-        icon: 'warning',
-        confirmButtonColor: '#447695', 
-      })
-    }else {
-      postData()
-      Swal.fire({
-        title:'Expense created',
-        icon :"success",
-        iconColor : "#d0e9e7",
-        confirmButtonColor: '#447695',
-      })
-    }
-  }
 
   if (!Data) return <Loader />;
   return (
@@ -268,8 +239,30 @@ console.log(Id)
             <Button
               variant="outlined" 
               onClick={() => {
-                checkDataAndPost()
-              }}
+                              if (DataPost.description === "" || DataPost.amount=== "" || DataPost.date === ""){
+                                Swal.fire({
+                                  title: 'field is Empty !',
+                                  icon: 'warning',
+                                  confirmButtonColor: '#447695', 
+                                })
+                              }else {
+                                axios
+                                .post(`${URL}/expense/`, DataPost)
+                                    .then((res) => {
+                                      console.log(res);
+                                      getData();
+                                    })
+                                    .catch((err) => {
+                                      console.log(err.message);
+                                    });
+                                Swal.fire({
+                                  title:'Expense created',
+                                  icon :"success",
+                                  iconColor : "#d0e9e7",
+                                  confirmButtonColor: '#447695',
+                                })
+                              }
+                            }}
             >
               Submit
             </Button>
