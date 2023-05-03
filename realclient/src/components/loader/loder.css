@@ -4,7 +4,7 @@
     align-items: center;
   }
   
-  .bars {
+  .bas {
     width: 10px;
     height: 20px;
     margin: 0 2px;
@@ -12,52 +12,52 @@
     animation: loader3 3s ease-in-out infinite;
   }
   
-  .bar1 {
+  .ba1 {
     background-color: var(--lightBlue);
     animation-delay: -0.8s;
   }
   
-  .bar2 {
+  .ba2 {
     background-color: var(--darkBlue);
     animation-delay: -0.7s;
   }
   
-  .bar3 {
+  .ba3 {
     background-color: var(--lightBlue);
     animation-delay: -0.6s;
   }
   
-  .bar4 {
+  .ba4 {
     background-color: var(--darkBlue);
     animation-delay: -0.5s;
   }
   
-  .bar5 {
+  .ba5 {
     background-color: var(--lightBlue);
     animation-delay: -0.4s;
   }
   
-  .bar6 {
+  .ba6 {
     background-color: var(--darkBlue);
     animation-delay: -0.3s;
   }
   
-  .bar7 {
+  .ba7 {
     background-color: var(--lightBlue);
     animation-delay: -0.2s;
   }
   
-  .bar8 {
+  .ba8 {
     background-color: var(--darkBlue);
     animation-delay: -0.1s;
   }
   
-  .bar9 {
+  .ba9 {
     background-color: var(--lightBlue);
     animation-delay: 0s;
   }
   
-  .bar10 {
+  .ba10 {
     background-color: var(--darkBlue);
     animation-delay: 0.1s;
   }
@@ -75,6 +75,7 @@
       transform: scale(1);
     }
   }
+
   .Loader{
     width: 100%;
     height: 598px;

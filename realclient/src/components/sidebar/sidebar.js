@@ -46,7 +46,14 @@ const links = [
     },
 ];
 
-function SideBar() {
+function SideBar(props) {
+
+
+
+    const iscollaps = ()=>{
+        props.isCollaps(!props.Collaps)
+    }
+
     let activeStyle = {
         backgroundColor: "#d0e9e7",
         color: "#447695",
@@ -84,7 +91,7 @@ function SideBar() {
       
     return (
         <div className="Side_bar">
-            <button onClick={()=>{sideCollaps();isVisible();}} className="arrow-btn">{iconBtn}</button>
+            <button onClick={()=>{sideCollaps();isVisible();iscollaps()}} className="arrow-btn">{iconBtn}</button>
             <div className="title-Side">
                 <div>
                     {title}

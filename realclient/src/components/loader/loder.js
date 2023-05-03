@@ -3,16 +3,16 @@ import "../loader/loder.css"
 function Loader() {
     return ( <div className="Loader">
         <div className="loader3">
-  <div className="bars bar1"></div>
-  <div className="bars bar2"></div>
-  <div className="bars bar3"></div>
-  <div className="bars bar4"></div>
-  <div className="bars bar5"></div>
-  <div className="bars bar6"></div>
-  <div className="bars bar7"></div>
-  <div className="bars bar8"></div>
-  <div className="bars bar9"></div>
-  <div className="bars bar10"></div>
+  <div className="bas ba1"></div>
+  <div className="bas ba2"></div>
+  <div className="bas ba3"></div>
+  <div className="bas ba4"></div>
+  <div className="bas ba5"></div>
+  <div className="bas ba6"></div>
+  <div className="bas ba7"></div>
+  <div className="bas ba8"></div>
+  <div className="bas ba9"></div>
+  <div className="bas ba10"></div>
 </div>
 
     </div> );

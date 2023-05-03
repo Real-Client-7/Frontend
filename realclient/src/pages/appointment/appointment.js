@@ -9,7 +9,6 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../App";
-
 function Income() {
     const URL =useContext(Url)
     const [Data, setData] = useState(null);
@@ -114,7 +113,7 @@ function Income() {
             name: "patient",
             label: "Patient",
             options: {
-                customBodyRender: (value) => `${value.first_name} ${value.last_name}` ,
+                customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
             }},
         {
             name: "time",
@@ -368,7 +367,7 @@ console.log(DataPatient)
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
-                        <TextField type="date" required="required" name="date" onChange={handelChangePost} />
+                        <input type="datetime-local" required="required" name="date" onChange={handelChangePost} />
                         <Button
                             variant="outlined"
                             onClick={() => {
@@ -476,14 +475,14 @@ console.log(DataPatient)
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
-                        <TextField type="date" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
+                        <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
                         <Button variant="outlined" onClick={EditData}>
                             Edit Appoitment
                         </Button>
                     </form>
                 )}
             </div>
-            <div className="income_table">
+            <div className="income_table" style={{height:"83vh"}}>
                 <div className="table_mui">
                     <MUIDataTable
                         columns={columns}
