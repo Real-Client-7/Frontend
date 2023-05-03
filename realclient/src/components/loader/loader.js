@@ -2,13 +2,21 @@ import "./loader.css";
 import React from "react";
 
 function Loader() {
-  function openPopup() {
-    document.querySelector(".employee-popup").showModal();
-  }
+
   return (
-    <div className="loader-container">
-      <div className="loader"></div>
-    </div>
+    
+    <div className="loader3">
+<div className="bars bar1"></div>
+<div className="bars bar2"></div>
+<div className="bars bar3"></div>
+<div className="bars bar4"></div>
+<div className="bars bar5"></div>
+<div className="bars bar6"></div>
+<div className="bars bar7"></div>
+<div className="bars bar8"></div>
+<div className="bars bar9"></div>
+<div className="bars bar10"></div>
+</div>
   );
 }
 
