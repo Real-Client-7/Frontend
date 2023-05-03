@@ -41,7 +41,7 @@
       color:rgb(93,93,93);
   }
   
-  .btn {
+  .btnLogin {
       background-color: transparent;
       padding: 12px 6px;
       font-size: 14px;
@@ -162,7 +162,7 @@
         align-items: center;
       }
       
-      .btn-group .btn {
+      .btn-group .btnLogin {
         width: 100%;
         margin-right: 0;
         margin-bottom: 12px;
@@ -207,29 +207,15 @@
   }
   
   @media (min-width: 1240px) {
-      .btn-group .btn {
+      .btn-group .btnLogin {
           width: 48%;
           margin-right: 2%;
       }
-      .btn-group .btn:last-child { margin-right: 0; }
+      .btn-group .btnLogin:last-child { margin-right: 0; }
   }
   
   
-  
-  /* Mobile Styling */
-   
-  /* Mobile Styling */
-/* @media only screen and (max-width: 800px) {
-  #login-wrap {
-      padding: 10px;
-  }
-  .login-card {
-      padding: 12px;
-  }
-  .input-group {
-      width: 100%;
-  }
-} */
+
   @media (max-width: 800px) {
       .login-card {
           flex: 100%;
@@ -253,7 +239,7 @@
           font-size: 14px;
         }
       
-        .btn {
+        .btnLogin  {
           font-size: 12px;
           padding: 8px;
         }

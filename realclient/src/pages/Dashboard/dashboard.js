@@ -1,6 +1,11 @@
+import Calendar from "../../components/calendar/calendar.js";
 function Dashboard() {
-    return ( <>
-        </> );
+    return (
+        <div className="Dashboard">
+
+            <Calendar />
+        </div>
+    );
 }
 
 export default Dashboard;

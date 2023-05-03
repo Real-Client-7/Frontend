@@ -19,7 +19,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-    const from = location.state?.from?.pathname || "/dashboard";
+   const from = location.state?.from?.pathname || "/dashboard";
 
 
 
@@ -113,7 +113,7 @@ function Login() {
               </i>
             </div>
             <div className="btn-group">
-              <button type="submit" value="Submit" className="btn btn-primary">
+              <button type="submit" value="Submit" className="btnLogin btn-primary">
                 {loading ? 'Checking...' : 'Login'}
               </button>
             </div>
