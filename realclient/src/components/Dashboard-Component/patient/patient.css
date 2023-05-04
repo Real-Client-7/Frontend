@@ -59,6 +59,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 99999;
 }
 .container-patients{
     width: 80%;
@@ -68,6 +69,7 @@
     border-radius: 10px;
     flex-direction: column;
     position: relative;
+    
 }
 .button-patient{
     position: absolute;

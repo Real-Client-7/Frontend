@@ -8,7 +8,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
-import { Url } from "../../App";
+import { Url } from "../../components/layout";
 function Income() {
     const URL =useContext(Url)
     const [Data, setData] = useState(null);

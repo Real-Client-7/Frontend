@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import Header from './header/header';
 import SideBar from './sidebar/sidebar'
-import {useState,useContext} from  "react"
+import {useState,useContext,createContext} from  "react"
  import "../App.css"
+ export const Url = createContext()
 
 function Layout({ children }) {
   const [expanded , setExpanded] = useState(false)
-  const URL = "http://localhost:4600"
+  const URL = "http://localhost:8001"
   return (
     <main className="App">
       <SideBar isCollaps ={setExpanded} Collaps = {expanded}/>

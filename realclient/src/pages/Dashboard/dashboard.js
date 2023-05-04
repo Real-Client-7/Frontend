@@ -7,11 +7,15 @@ import Calendar from "../../components/calendar/calendar.js";
 
 function Dashboard() {
     return (
-        <div className="Dashboard">
+        <div className="Dashboard" >
+            <div className="first-lineDashboard"> 
             <PatientBox />
             <AppointmentCard />
             <Sugary/>
+            </div>
+            <div className="seconde-line">
             <Calendar />
+            </div>
         </div>
     );
 }

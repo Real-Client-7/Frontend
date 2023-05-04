@@ -2,7 +2,7 @@ import "../patient/patient.css"
 import PatientsPopUb from "../patient/patient-popUp/Patien-popUp"
 import {useState ,useEffect,useContext} from "react"
 import axios from "axios"
-import { Url } from "../../../App";
+import { Url } from "../../layout";
 import {ImEye} from "react-icons/im"
 import Loader from "../../loader/loader";
 

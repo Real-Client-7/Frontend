@@ -3,7 +3,7 @@ import "../incom/incom.css";
 import { useEffect, useState ,useContext } from "react";
 import axios from "axios";
 import Loader from "../../../components/loader/loder";
-import { Url } from "../../../App";
+import { Url } from "../../../components/layout";
 
 function Income() {
 
