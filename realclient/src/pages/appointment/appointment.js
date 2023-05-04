@@ -1,65 +1,90 @@
 import MUIDataTable from "mui-datatables";
+import ".././transaction/incom/incom.css";
 import "../appointment/appointment.css"
-import { useEffect, useState } from "react";
-import axios from "axios"
-import { TextField, Button } from "@mui/material";
-import { AiFillEdit } from "react-icons/ai"
-import { MdDelete } from "react-icons/md"
-import Loader from "../../components/loader/loder.js";
+import { useEffect, useState ,useContext } from "react";
+import axios from "axios";
+import { TextField, Button,Select,MenuItem } from "@mui/material";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+import Loader from "../../components/loader/loder";
+import Swal from "sweetalert2"
+import { Url } from "../../App";
+function Income() {
+    const URL =useContext(Url)
+    const [Data, setData] = useState(null);
+    const[DataPatient ,setDataPatient] = useState(null)
+    const[DataTreatment ,setDataTreatments] = useState(null)
+    const [DataById, setDataById] = useState({
+        patient:"",
+        time: "",
+        date: "",
+        note:"",
+        treatments:"",
+        total:"",
+        paid:"",
+        rest:""
+    });
 
-function Appointment() {
-
-    const [Data, setData] = useState(null)
-    const [DataById ,setDataById]=useState()
     const [DataPost, SetPostData] = useState({
-        description: "",
-        amount: "",
-        date: ""
-    })
-    const [DataEdit, SetEditData] = useState({
-        description: "",
-        amount: "",
-        date: ""
-    })
-    const [Id , setId] = useState()
+        patient:"",
+        time: "",
+        date: "",
+        note:"",
+        treatments:"",
+        total:"",
+        paid:"",
+        rest:""
+    });
+    const [DataEdit, SetEditData] = useState();
 
+    const [Id, setId] = useState(null);
 
     const show = () => {
         var ele = document.querySelector(".none");
         ele.classList.toggle("form-add-income");
+    };
 
+    const [visibleAdd, isShowAdd] = useState(false);
+    const [visibleEdit, isShowEdit] = useState(false);
+    const [iconEdit, isShowIcon] = useState(true);
+    const [iconAdd, isShowIconAdd] = useState(true);
+
+    const restDataPost = {
+        patient:"",
+        time: "",
+        date: "",
+        note:"",
+        treatments:"",
+        total:"",
+        paid:"",
+        rest:""
     }
-
-    const [visibleAdd, isShowAdd] = useState(false)
-    const [visibleEdit, isShowEdit] = useState(false)
-    const [iconEdit, isShowIcon] = useState(true)
-    const [iconAdd, isShowIconAdd] = useState(true)
-
 
     const showAdd = () => {
         if (visibleAdd === false) {
-            isShowAdd(true)
+            isShowAdd(true);
         } else {
-            isShowAdd(false)
+            isShowAdd(false);
         }
-    }
+    };
     const showEdit = () => {
         if (visibleEdit === false) {
-            isShowEdit(true)
+            isShowEdit(true);
         } else {
-            isShowEdit(false)
+            isShowEdit(false);
         }
-    }
+    };
 
     const showicon = () => {
-        iconEdit ? isShowIcon(false) : isShowIcon(true)
-    }
+        iconEdit ? isShowIcon(false) : isShowIcon(true);
+    };
     const showiconAdd = () => {
-        iconAdd ? isShowIconAdd(false) : isShowIconAdd(true)
-    }
+        iconAdd ? isShowIconAdd(false) : isShowIconAdd(true);
+    };
 
- 
-    console.log(Data)
+
+
+
     const options = {
         filterType: "checkbox",
         responsive: "simple",
@@ -71,116 +96,184 @@ function Appointment() {
         pagination: true,
         rowsPerPage: 5,
         loaded: true,
-        // jumpToPage:false,
-        rowsPerPageOptions:[5], // this to specifique rows in page
-        onRowClick: (rowData, rowMeta) => {
-            const id = rowData[0]; // Assuming that the ID column is the first column
-            setId(id)
-        },
-    }
-const handelDelete = (id)=> {
+        rowsPerPageOptions: [5], // this to specifique rows in page
+        
+    };
 
-        axios.delete(`http://localhost:8001/expense/${id}`)
-        .then((response) => { console.log(response.data.message);getData();})
-        .catch((err)=>{console.log(err.message)})
-  
-}
+    const columns = [
 
-    const getDataByid = () => {
-
-        axios.get(`http://localhost:8001/expense/${Id}`).then((response) => {
-            setDataById(response.data.response)
-        }).catch((err) => {
-            console.log(err.message)
-        })
-    }
-
-
-    const columns = [{
-        name:"_id",
-        label:" ",
-        options:{
-            display:"none"
-        }
-    },
         {
-        name: "description",
-        label: "Description"
-    },
-    {
-        name: "amount",
-        label: "Amount"
-    }, {
-        name: "date",
-        label: "Date"
-    }, {
-        name: "actions",
-        label: "Actions",
-        options: {
-            filter: false,
-            sort: false,
-            empty: true,
-            customBodyRender: (value, tableMeta, updateValue) => {
-                return (
-                    <div style={{ display: "flex" }}>
-                        {iconEdit && <Button sx={{ height: "40px" }} onClick={() => { showEdit(); show(); showiconAdd() ; getDataByid() }} >
-                            <AiFillEdit />
-                        </Button>}
-                        <Button sx={{ height: "40px" }} onClick={() => { handelDelete(tableMeta.rowData[0])}}>
-                            <MdDelete />
-                        </Button>
-                    </div>
-                );
+            name: "_id",
+            label: " ",
+            options: {
+                display: "none"
             },
         },
-    },
-    ]
-    
+        {
+            name: "patient",
+            label: "Patient",
+            options: {
+                customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
+            }},
+        {
+            name: "time",
+            label: "Time",
+        },
+        {
+            name: "date",
+            label: "Date",
+        },
+        {
+            name: "treatments",
+            label: "Treatment",
+            options: {
+                customBodyRender: (value) => value.type ,
+            }},
+        {
+            name: "note",
+            label: "Note",
+        },
+        {
+            name : "total",
+            lable:"Total"
+        },
+        {
+            name : "paid",
+            lable:"Paid"
+        },
+        {
+            name : "rest",
+            lable:"Rest"
+        },
+        {
+            name: "actions",
+            label: "Actions",
+            options: {
+                filter: false,
+                sort: false,
+                empty: true,
+                customBodyRender: (value, tableMeta, updateValue) => {
+                    return (
+                        <div style={{ display: "flex" }}>
+                            {iconEdit && (
+                                <Button
+                                    sx={{ height: "40px" }}
+                                    onClick={() => {
+                                        axios
+                                        .get(`${URL}/appointment/getAppoitment/${tableMeta.rowData[0]}`)
+                                        .then((response) => {
+                                            setDataById(response.data);
+                                            setId(tableMeta.rowData[0]);
+                                            show();
+                                            showiconAdd();
+                                            showEdit();
+                                        })
+                                        .catch((err) => {
+                                            console.log(err.message);
+                                        });
+                                        console.log(DataById)
+                                    }}
+                                >
+                                    <AiFillEdit />
+                                </Button>
+                            )}
+                            <Button
+                                sx={{ height: "40px" }}
+                                onClick={() => {
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "You won't be able to revert this!",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#447695',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, delete it!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                    axios
+                                                        .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
+                                                        .then((response) => {
+                                                            console.log(response.data.message);
+                                                            getData();
+                                                        })
+                                                        .catch((err) => {
+                                                            console.log(err.message);
+                                                        });
+                                            }
+                                        })
+                                }
+                            }
+                            >
+                                <MdDelete />
+                            </Button>
+                        </div>
+                    );
+                },
+            },
+        },
+    ];
+    console.log(Id)
     const getData = () => {
-
-        axios.get("http://localhost:8001/expense/").then((response) => {
-            setData(response.data.response)
-        }).catch((err) => {
-            console.log(err.message)
-        })
-    }
-
-
+        axios
+            .get(`${URL}/appointment/`)
+            .then((response) => {
+                console.log(response)
+                setData(response.data.response);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    };
+    const getDataPatient = () => {
+        axios
+            .get(`${URL}/patient/getAllPatients`)
+            .then((response) => {
+                setDataPatient(response.data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    };
+    const getDataTreatments = () => {
+        axios
+            .get(`${URL}/treatments/`)
+            .then((response) => {
+                setDataTreatments(response.data.response);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    };
+console.log(DataPatient)
 
     useEffect(() => {
-        getData()
-        
-    },[])
-
-
-    const postData = () => {
-        axios.post("http://localhost:8001/expense/", DataPost).then((res) => {
-            console.log(res)
-            getData()
-
-        }).catch((err) => {
-            console.log(err.message)
-        })
-    }
+        getData();
+        getDataPatient()
+        getDataTreatments()
+    },[]);
 
     const handelChangePost = (e) => {
-
         const value = e.target.value;
         SetPostData({
             ...DataPost,
             [e.target.name]: value,
         });
-    }
+    };
 
+    console.log(DataEdit)
 
     const EditData = () => {
-        axios.put(`http://localhost:4600/expense/${Id}`, DataEdit).then((res) => {
-            console.log(res)
-            getData()
-        }).catch((err) => {
-            console.log(err.message)
-        })
-    }
+        axios
+            .put(`${URL}/appointment/update/${Id}`, DataEdit)
+            .then((res) => {
+                console.log(res);
+                getData();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     const handelChangeEdit = (e) => {
 
         const value = e.target.value;
@@ -188,52 +281,231 @@ const handelDelete = (id)=> {
             ...DataEdit,
             [e.target.name]: value,
         });
-    }
-    console.log(DataEdit)
+    };
+    console.log(DataPost)
 
-    if (!Data) return <Loader />
+    if (!Data) return <Loader />;
     return (
-
         <div className="incomss">
             <div className="none">
                 {/* for add expense */}
-                {visibleAdd &&
+                {visibleAdd && (
                     <form>
                         <div className="head-form">
-                            <h2>Add Expense</h2>
-                            <button onClick={() => { show(); showAdd(); showicon() }}>x</button>
+                            <h2>Add Appointment</h2>
+                            <button
+                                onClick={() => {
+                                    show();
+                                    showAdd();
+                                    showicon();
+                                }}
+                            >
+                                x
+                            </button>
                         </div>
-                        <label htmlFor="title"> Description</label>
-                        <TextField type="text" name="description" onChange={handelChangePost} required />
-                        <label htmlFor="amount"> Amount</label>
-                        <TextField type="number" name="amount" onChange={handelChangePost} required />
+                        <label htmlFor="patient"> Patient</label>
+                        <Select
+                            name="patient"
+                            required="required"
+                            onChange={handelChangePost}
+                        >
+                            {DataPatient.map((ele)=>{
+                                return <MenuItem value={ele._id} >{`${ele.first_name} ${ele.last_name}`}</MenuItem>
+                            })}
+                        </Select>
+                        <label htmlFor="treatment"> Treatment</label>
+                        <Select
+                            name="treatments"
+                            required="required"
+                            onChange={handelChangePost}
+                        >
+                            {DataTreatment.map((ele)=>{
+                                return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
+                            })}
+                        </Select>
+                        <label htmlFor="time"> Time</label>
+                        <TextField
+                            type="text"
+                            name="time"
+                            required="required"
+                            onChange={handelChangePost}
+                        />
+                        <label htmlFor="note"> Note</label>
+                        <TextField
+                            type="text"
+                            name="note"
+                            required="required"
+                            onChange={handelChangePost}
+                        />
+                        <div className="Bill">
+                            <div>
+                        <label htmlFor="total"> Total</label>
+                        <TextField
+                            type="number"
+                            name="total"
+                            required="required"
+                            onChange={handelChangePost}
+                        />
+                        </div>
+                        <div>
+                        <label htmlFor="paid"> Paid</label>
+                        <TextField
+                            type="number"
+                            name="paid"
+                            required="required"
+                            onChange={handelChangePost}
+                        />
+                        </div>
+                        <div>
+                        <label htmlFor="rest"> Rest</label>
+                        <TextField
+                            type="number"
+                            name="rest"
+                            onChange={handelChangePost}
+                            
+                        />
+                        </div>
+                        </div>
                         <label htmlFor="date"> Date</label>
-                        <TextField type="date" name="date" onChange={handelChangePost}  required/>
-                        <Button variant="outlined" onClick={() => { postData();}}>Submit</Button>
-                    </form>}
+                        <input type="datetime-local" required="required" name="date" onChange={handelChangePost} />
+                        <Button
+                            variant="outlined"
+                            onClick={() => {
+                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.time === "" || DataPost.treatments === "") {
+                                                Swal.fire({
+                                                    title: 'field is Empty !',
+                                                    icon: 'warning',
+                                                    confirmButtonColor: '#447695',
+                                                })
+                                            } else {
+                                                axios
+                                                .post(`${URL}/appointment/addAppoitment`, DataPost)
+                                                .then((res) => {
+                                                    Swal.fire({
+                                                        title: 'Income created',
+                                                        icon: "success",
+                                                        iconColor: "#d0e9e7",
+                                                        confirmButtonColor: '#447695',
+                                                    })
+                                                    SetPostData(restDataPost)
+                                                    getData();
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err.message);
+                                                });
+                                            }}
+                                        }
+                        >
+                            Submit
+                        </Button>
+                    </form>
+                )}
                 {/* for edit expense */}
-                {visibleEdit && <form>
-                    <div className="head-form">
-                        <h2>Edit Expense </h2>
-                        <button onClick={() => { show(); showEdit(); showiconAdd() }}>x</button>
-                    </div>
-                    <label htmlFor="title"> Describtion</label>
-                    <TextField name="description" value={DataById.description} onChange={handelChangeEdit} />
-                    <label htmlFor="amount"> Amount</label>
-                    <TextField name="amount" value={DataById.amount} onChange={handelChangeEdit} />
-                    <label htmlFor="date"> Date</label>
-                    <TextField type="date" name="date" value={DataById.date} onChange={handelChangeEdit} />
-                    <Button variant="outlined" onClick={EditData}>Edit Expense </Button>
-                </form>}
+                {visibleEdit && (
+                    <form>
+                        <div className="head-form">
+                            <h2>Edit Appoitment </h2>
+                            <button
+                                onClick={() => {
+                                    show();
+                                    showEdit();
+                                    showiconAdd();
+                                    SetEditData(null)
+                                }}
+                            >
+                                x
+                            </button>
+                        </div>
+                        <label htmlFor="patient"> Patient</label>
+                        <Select
+                            name="patient"
+                            required="required"
+                            onChange={handelChangeEdit}
+                        >
+                            {DataPatient.map((ele)=>{
+                                return <MenuItem  value={ele._id} >{`${ele.first_name} ${ele.last_name}`}</MenuItem>
+                            })}
+                        </Select>
+                        <label htmlFor="treatment"> Treatment</label>
+                        <Select
+                            name="treatments"
+                            required="required"
+                            onChange={handelChangeEdit}
+                        >
+                            {DataTreatment.map((ele)=>{
+                                return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
+                            })}
+                        </Select>
+                        <label htmlFor="time">Time</label>
+                        <TextField
+                            type="text"
+                            name="time"
+                            onChange={handelChangeEdit}
+                            defaultValue={DataById.time}
+                        />
+                        <label htmlFor="note"> Note</label>
+                        <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
+                        <div className="Bill">
+                            <div>
+                        <label htmlFor="total"> Total</label>
+                        <TextField
+                            type="number"
+                            name="total"
+                            onChange={handelChangeEdit}
+                            defaultValue={DataById.total}
+                        />
+                        </div>
+                        <div>
+                        <label htmlFor="paid"> Paid</label>
+                        <TextField
+                            type="number"
+                            name="paid"
+                            onChange={handelChangeEdit}
+                            defaultValue={DataById.paid}
+                        />
+                        </div>
+                        <div>
+                        <label htmlFor="rest"> Rest</label>
+                        <TextField
+                            type="number"
+                            name="rest"
+                            defaultValue={DataById.rest}
+                            onChange={handelChangeEdit}
+                        />
+                        </div>
+                        </div>
+                        <label htmlFor="date"> Date</label>
+                        <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
+                        <Button variant="outlined" onClick={EditData}>
+                            Edit Appoitment
+                        </Button>
+                    </form>
+                )}
             </div>
-            <div className="income_table">
+            <div className="income_table" style={{height:"83vh"}}>
                 <div className="table_mui">
-                    <MUIDataTable columns={columns} data={Data} options={options} title={iconAdd && <Button onClick={() => { show(); showAdd(); showicon() }}>+ Add Expense</Button>} />
+                    <MUIDataTable
+                        columns={columns}
+                        data={Data}
+                        options={options}
+                        title={
+                            iconAdd && (
+                                <Button
+                                    onClick={() => {
+                                        show();
+                                        showAdd();
+                                        showicon();
+                                    }}
+                                >
+                                    + Add Appoitment
+                                </Button>
+                            )
+                        }
+                    />
                 </div>
             </div>
         </div>
     );
 }
 
-
-export default Appointment;
+export default Income;

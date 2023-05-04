@@ -1,0 +1,42 @@
+.Appoitment_box{
+    width: 30%;
+    height: 220px;
+    background-color: var(--lightBlue);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.Appoitment_box span {
+    margin-left:50px;
+    margin-right:40px;
+    font-size: 40px ;
+    font-weight: 900;
+
+} 
+.Appoitment_box:nth-child(2){
+    display: flex;
+    flex-direction:column;
+
+}
+.Appoitment_box div h2 , .Appoitment_box div p {
+    display: flex;
+    justify-content: flex-end;
+    margin: 8px;
+    margin-right: 40px;
+}
+.Appoitment_box div p{
+    color: var(--darkBlue);
+    font-size: 17px;
+    font-weight: 600;
+}
+.Appoitment_box div h2{
+    font-size: 35px;
+}
+.viewAndNmbrAppoitment{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 40px;
+}

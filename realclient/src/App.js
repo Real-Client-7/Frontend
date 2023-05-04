@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-
 import Appointment from "../src/pages/appointment/appointment"
 import Assistant from "../src/pages/Assistant/assistant"
 import Dashboard from "../src/pages/Dashboard/dashboard"
@@ -10,7 +9,6 @@ import RequireAuth from './components/RequireAuth'
 function App() {
   return (
     <Routes>
-
       {/* public routes */}
       <Route path="Login" element={<Login />} />
 

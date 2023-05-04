@@ -1,77 +1,67 @@
-.loader3 {
+ 
+ .loader3 {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
   }
-  
-
-  .bas {
-    width: 10px;
-    height: 20px;
+  .bars {
+    width: 5px;
+    height: 14px;
     margin: 0 2px;
-    border-radius: 4px;
+    border-radius: 2px;
     animation: loader3 3s ease-in-out infinite;
   }
   
-
-  .ba1 {
-    background-color: var(--lightBlue);
+  .bar1 {
+    background-color: var(--white);
     animation-delay: -0.8s;
   }
   
-
-  .ba2 {
+  .bar2 {
     background-color: var(--darkBlue);
     animation-delay: -0.7s;
   }
   
-
-  .ba3 {
-    background-color: var(--lightBlue);
+  .bar3 {
+    background-color: var(--white);
     animation-delay: -0.6s;
   }
   
-
-  .ba4 {
+  .bar4 {
     background-color: var(--darkBlue);
     animation-delay: -0.5s;
   }
   
-
-  .ba5 {
-    background-color: var(--lightBlue);
+  .bar5 {
+    background-color: var(--white);
     animation-delay: -0.4s;
   }
   
-
-  .ba6 {
+  .bar6 {
     background-color: var(--darkBlue);
     animation-delay: -0.3s;
   }
   
-
-  .ba7 {
-    background-color: var(--lightBlue);
+  .bar7 {
+    background-color: var(--white);
     animation-delay: -0.2s;
   }
   
-
-  .ba8 {
+  .bar8 {
     background-color: var(--darkBlue);
     animation-delay: -0.1s;
   }
-  
-
-  .ba9 {
-    background-color: var(--lightBlue);
+/*   
+  .bar9 {
+    background-color: var(--white);
     animation-delay: 0s;
   }
   
-
-  .ba10 {
+  .bar10 {
     background-color: var(--darkBlue);
     animation-delay: 0.1s;
-  }
+  } */
   
   @keyframes loader3 {
     0% {
@@ -85,13 +75,4 @@
     40% {
       transform: scale(1);
     }
-  }
-
-
-  .Loader{
-    width: 100%;
-    height: 598px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }

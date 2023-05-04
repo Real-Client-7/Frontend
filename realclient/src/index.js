@@ -13,6 +13,7 @@ ReactDOM.render(
           <Route path="/*" element={<App />} />
         </Routes>
       </AuthProvider>
+
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

@@ -10,6 +10,7 @@ import {BsFillArrowRightCircleFill} from "react-icons/bs"
 import {BsFillArrowLeftCircleFill} from "react-icons/bs"
 import image from "../image/dc-Bassam.jpeg"
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 const links = [
@@ -45,7 +46,14 @@ const links = [
     },
 ];
 
-function SideBar() {
+function SideBar(props) {
+
+
+
+    const iscollaps = ()=>{
+        props.isCollaps(!props.Collaps)
+    }
+
     let activeStyle = {
         backgroundColor: "#d0e9e7",
         color: "#447695",
@@ -56,6 +64,7 @@ function SideBar() {
     const [title , setTitle] = useState("")
     const [show , setShow] = useState(true)
     const [iconBtn ,seticoneBTn]=useState(<BsFillArrowLeftCircleFill/>)
+    const [width ,setwidth] = useState(true)
 
     function sideCollaps(){
         let element = document.querySelector(".Side_bar")
@@ -74,10 +83,15 @@ function SideBar() {
             seticoneBTn(<BsFillArrowLeftCircleFill/>)
         }
     }
-    
+   useEffect(()=>{if (window.innerWidth < 600) {
+    setwidth(false)
+  } else {
+  }},[])
+        
+      
     return (
         <div className="Side_bar">
-            <button onClick={()=>{sideCollaps();isVisible();}} className="arrow-btn">{iconBtn}</button>
+            <button onClick={()=>{sideCollaps();isVisible();iscollaps()}} className="arrow-btn">{iconBtn}</button>
             <div className="title-Side">
                 <div>
                     {title}
@@ -101,7 +115,7 @@ function SideBar() {
                         onClick={()=>{setTitle(ele.name)}}
                         >
                             <div className="each_link">
-                                {ele.icon} {show&&<>{ele.name }</>}
+                                {width&&<>{ele.icon}</>} {show&&<>{ele.name }</>}
                             </div>
                         </NavLink>
                     );
