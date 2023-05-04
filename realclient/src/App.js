@@ -1,37 +1,26 @@
-
-import './App.css';
-import { Outlet } from 'react-router-dom';
-import SideBar from './components/sidebar/sidebar';
-import Header from './components/header/header';
-import {createContext, useState} from "react"
-
-export const Url = createContext()
-
-
-function App(props) {
-
-  const [expanded , setExpanded] = useState(false)
-
-
-
-  const URL = "http://localhost:4600"
+import { Routes, Route } from 'react-router-dom'
+import Appointment from "../src/pages/appointment/appointment"
+import Assistant from "../src/pages/Assistant/assistant"
+import Dashboard from "../src/pages/Dashboard/dashboard"
+import Transaction from "../src/pages/transaction/transaction"
+import Login from "../src/pages/login/logins"
+import Layout from "../src/components/layout"
+import RequireAuth from './components/RequireAuth'
+function App() {
   return (
-    <div className="App">
- 
-      <SideBar isCollaps ={setExpanded} Collaps = {expanded}/>
-     
-          <div  className={expanded?"right_side":"right_side-on-6"} >
-              <div className='Header'>
-            <Header />
-              </div>
-              <div style={{margin : "20px 20px 20px 20px" , height:"100%" ,backgroundColor:"#f6f6f6" , borderRadius:"20px"}}>
-                <Url.Provider value={URL}>
-                <Outlet/>
-                </Url.Provider>
-              </div>
-          </div>
-    </div>
-  );
-}
+    <Routes>
+      {/* public routes */}
+      <Route path="Login" element={<Login />} />
 
+      {/* protect routes */}
+
+      <Route  path="/" element={<RequireAuth />}>
+          <Route path="Appointment" element={<Appointment />} />
+          <Route path="Assistant" element={<Assistant />} />
+          <Route path="Dashboard" element={<Dashboard />} />
+          <Route path="Transaction" element={<Transaction />} />
+      </Route>
+    </Routes>
+  )
+}
 export default App;

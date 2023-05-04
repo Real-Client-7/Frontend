@@ -8,7 +8,7 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../App";
-import "../patient/patient.css"
+import "./patient.css"
 
 function Expense() {
   const URL =useContext(Url)

@@ -3,6 +3,7 @@ import "../loader/loder.css"
 function Loader() {
     return ( <div className="Loader">
         <div className="loader3">
+
   <div className="bas ba1"></div>
   <div className="bas ba2"></div>
   <div className="bas ba3"></div>

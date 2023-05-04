@@ -4,6 +4,7 @@
     align-items: center;
   }
   
+
   .bas {
     width: 10px;
     height: 20px;
@@ -12,51 +13,61 @@
     animation: loader3 3s ease-in-out infinite;
   }
   
+
   .ba1 {
     background-color: var(--lightBlue);
     animation-delay: -0.8s;
   }
   
+
   .ba2 {
     background-color: var(--darkBlue);
     animation-delay: -0.7s;
   }
   
+
   .ba3 {
     background-color: var(--lightBlue);
     animation-delay: -0.6s;
   }
   
+
   .ba4 {
     background-color: var(--darkBlue);
     animation-delay: -0.5s;
   }
   
+
   .ba5 {
     background-color: var(--lightBlue);
     animation-delay: -0.4s;
   }
   
+
   .ba6 {
     background-color: var(--darkBlue);
     animation-delay: -0.3s;
   }
   
+
   .ba7 {
     background-color: var(--lightBlue);
     animation-delay: -0.2s;
   }
   
+
   .ba8 {
     background-color: var(--darkBlue);
     animation-delay: -0.1s;
   }
   
+
   .ba9 {
     background-color: var(--lightBlue);
     animation-delay: 0s;
   }
   
+
   .ba10 {
     background-color: var(--darkBlue);
     animation-delay: 0.1s;
@@ -75,6 +86,7 @@
       transform: scale(1);
     }
   }
+
 
   .Loader{
     width: 100%;
