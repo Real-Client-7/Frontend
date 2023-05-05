@@ -1,4 +1,4 @@
-import React, {useState ,useEffect} from 'react';
+import React, {useState ,useEffect } from 'react';
 import "./login.css";
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import img from "../login/loginimg.png"
 import { useCookies } from "react-cookie";
-
+import { Url } from "../../components/layout";
+import { useContext } from 'react';
 
 
   
@@ -19,6 +20,9 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const URL =useContext(Url)
+
    const from = location.state?.from?.pathname || "/dashboard";
 
 
@@ -34,7 +38,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8001/admin/login', {
+      const response = await axios.post(`http://localhost:4600/admin/login`, {
         email,
         password,
         headers: { "content-type": "application/json" },

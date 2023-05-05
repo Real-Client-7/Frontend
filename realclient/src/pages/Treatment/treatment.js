@@ -9,20 +9,17 @@ import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2";
 import { Url } from "../../components/layout";
 
-function Assistant() {
+function Treatment() {
   const URL = useContext(Url);
   const [Data, setData] = useState(null);
   const [DataById, setDataById] = useState({
-    email: "",
-    username: "",
-    password: "",
-    isSuperAdmin: "",
+    type: "",
+    nbr_of_tooth: "",
+    appointment: "",
   });
   const [DataPost, SetPostData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    isSuperAdmin: "",
+    type: "",
+    nbr_of_tooth: "",
   });
   const [DataEdit, SetEditData] = useState(null);
   const [Id, setId] = useState();
@@ -81,21 +78,17 @@ function Assistant() {
       },
     },
     {
-      name: "email",
-      label: "Email",
+      name: "type",
+      label: "Type",
     },
     {
-      name: "username",
-      label: "Username",
+      name: "nbr_of_tooth",
+      label: "Nbr of tooth",
     },
-    {
-      name: "password",
-      label: "Password",
-    },
-    {
-      name: "isSuperAdmin",
-      label: "isSuperAdmin",
-    },
+    // {
+    //   name: "appointment",
+    //   label: "Appointment",
+    // },
     {
       name: "actions",
       label: "Actions",
@@ -111,7 +104,7 @@ function Assistant() {
                   sx={{ height: "40px" }}
                   onClick={() => {
                     axios
-                      .get(`${URL}/admin/${tableMeta.rowData[0]}`)
+                      .get(`${URL}/treatments/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         setDataById(response.data.response);
                         setId(tableMeta.rowData[0]);
@@ -141,7 +134,7 @@ function Assistant() {
                   }).then((result) => {
                     if (result.isConfirmed) {
                       axios
-                        .delete(`${URL}/admin/${tableMeta.rowData[0]}`)
+                        .delete(`${URL}/treatments/${tableMeta.rowData[0]}`)
                         .then((response) => {
                           console.log(response);
                           getData();
@@ -164,7 +157,7 @@ function Assistant() {
   console.log(Id);
   const getData = () => {
     axios
-      .get(`${URL}/admin/`)
+      .get(`${URL}/treatments/`)
       .then((response) => {
         console.log(response);
         setData(response.data.response);
@@ -188,7 +181,7 @@ function Assistant() {
 
   const EditData = () => {
     axios
-      .put(`${URL}/admin/${Id}`, DataEdit)
+      .put(`${URL}/treatments/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
         getData();
@@ -215,7 +208,7 @@ function Assistant() {
         {visibleAdd && (
           <form>
             <div className="head-form">
-              <h2>Add Admin</h2>
+              <h2>Add Treatment</h2>
               <button
                 onClick={() => {
                   show();
@@ -226,43 +219,31 @@ function Assistant() {
                 x
               </button>
             </div>
-            <label htmlFor="email"> Email</label>
+            <label htmlFor="type"> Type</label>
             <TextField
               type="text"
-              name="email"
+              name="type"
               required="required"
               onChange={handelChangePost}
             />
-            <label htmlFor="username"> Username</label>
+            <label htmlFor="nbr_of_tooth"> Nbr Of Tooth</label>
             <TextField
               type="text"
-              name="username"
-              required="required"
+              name="nbr_of_tooth"
               onChange={handelChangePost}
             />
-            <label htmlFor="password"> Password</label>
+            {/* <label htmlFor="appointment"> Appointment</label>
             <TextField
               type="number"
               required="required"
-              name="password"
+              name="appointment"
               onChange={handelChangePost}
-            />
-            <label htmlFor="isSuperAdmin"> IsSuperAdmin</label>
-            <TextField
-              type="text"
-              required="required"
-              name="isSuperAdmin"
-              onChange={handelChangePost}
-            />
+            /> */}
+
             <Button
               variant="outlined"
               onClick={() => {
-                if (
-                  DataPost.email === "" ||
-                  DataPost.username === "" ||
-                  DataPost.password === "" ||
-                  DataPost.isSuperAdmin === "" 
-                ) {
+                if (DataPost.type === "" || DataPost.nbr_of_tooth === "") {
                   Swal.fire({
                     title: "field is Empty !",
                     icon: "warning",
@@ -270,20 +251,20 @@ function Assistant() {
                   });
                 } else {
                   axios
-                    .post(`${URL}/admin/add`, DataPost)
+                    .post(`${URL}/treatments/addTreatment`, DataPost)
                     .then((res) => {
                       console.log(res);
                       getData();
+                      Swal.fire({
+                        title: "Treatment created",
+                        icon: "success",
+                        iconColor: "#d0e9e7",
+                        confirmButtonColor: "#447695",
+                      });
                     })
                     .catch((err) => {
                       console.log(err.message);
                     });
-                  Swal.fire({
-                    title: "Admin created",
-                    icon: "success",
-                    iconColor: "#d0e9e7",
-                    confirmButtonColor: "#447695",
-                  });
                 }
               }}
             >
@@ -295,7 +276,7 @@ function Assistant() {
         {visibleEdit && (
           <form>
             <div className="head-form">
-              <h2>Edit Admin </h2>
+              <h2>Edit Treatment </h2>
               <button
                 onClick={() => {
                   show();
@@ -307,36 +288,30 @@ function Assistant() {
                 x
               </button>
             </div>
-            <label htmlFor="email"> Email</label>
+            <label htmlFor="type"> Type</label>
             <TextField
               type="text"
-              name="email"
+              name="type"
               onChange={handelChangeEdit}
-              defaultValue={DataById.email}
+              defaultValue={DataById.type}
             />
-            <label htmlFor="username"> Username</label>
+            <label htmlFor="nbr_of_tooth"> Nbr Of Tooth</label>
             <TextField
               type="text"
-              name="username"
-              defaultValue={DataById.username}
+              name="nbr_of_tooth"
+              defaultValue={DataById.nbr_of_tooth}
               onChange={handelChangeEdit}
             />
-            <label htmlFor="password"> Password</label>
+            {/* <label htmlFor="appointment"> Appointment</label>
             <TextField
               type="text"
-              name="password"
-              defaultValue={DataById.password}
+              name="appointment"
+              defaultValue={DataById.appointment}
               onChange={handelChangeEdit}
-            />
-            <label htmlFor="isSuperAdmin"> IsSuperAdmin</label>
-            <TextField
-              type="text"
-              name="isSuperAdmin"
-              defaultValue={DataById.isSuperAdmin}
-              onChange={handelChangeEdit}
-            />
+            /> */}
+
             <Button variant="outlined" onClick={EditData}>
-              Edit Admin
+              Edit Treatment
             </Button>
           </form>
         )}
@@ -356,7 +331,7 @@ function Assistant() {
                     showicon();
                   }}
                 >
-                  + Add Admin
+                  + Add Treatment
                 </Button>
               )
             }
@@ -367,4 +342,4 @@ function Assistant() {
   );
 }
 
-export default Assistant;
+export default Treatment;
