@@ -164,7 +164,7 @@ function Assistant() {
   console.log(Id);
   const getData = () => {
     axios
-      .get(`http://localhost:4600/admin/`)
+      .get(`${URL}/admin/`)
       .then((response) => {
         console.log(response);
         setData(response.data.response);

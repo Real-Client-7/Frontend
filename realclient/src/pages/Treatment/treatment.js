@@ -20,7 +20,6 @@ function Treatment() {
   const [DataPost, SetPostData] = useState({
     type: "",
     nbr_of_tooth: "",
-    appointment: "",
   });
   const [DataEdit, SetEditData] = useState(null);
   const [Id, setId] = useState();
@@ -86,10 +85,10 @@ function Treatment() {
       name: "nbr_of_tooth",
       label: "Nbr of tooth",
     },
-    {
-      name: "appointment",
-      label: "Appointment",
-    },
+    // {
+    //   name: "appointment",
+    //   label: "Appointment",
+    // },
     {
       name: "actions",
       label: "Actions",
@@ -158,7 +157,7 @@ function Treatment() {
   console.log(Id);
   const getData = () => {
     axios
-      .get(`http://localhost:4600/treatments/`)
+      .get(`${URL}/treatments/`)
       .then((response) => {
         console.log(response);
         setData(response.data.response);
@@ -231,25 +230,20 @@ function Treatment() {
             <TextField
               type="text"
               name="nbr_of_tooth"
-              required="required"
               onChange={handelChangePost}
             />
-            <label htmlFor="appointment"> Appointment</label>
+            {/* <label htmlFor="appointment"> Appointment</label>
             <TextField
               type="number"
               required="required"
               name="appointment"
               onChange={handelChangePost}
-            />
+            /> */}
 
             <Button
               variant="outlined"
               onClick={() => {
-                if (
-                  DataPost.type === "" ||
-                  DataPost.nbr_of_tooth === "" ||
-                  DataPost.appointment === ""
-                ) {
+                if (DataPost.type === "" || DataPost.nbr_of_tooth === "") {
                   Swal.fire({
                     title: "field is Empty !",
                     icon: "warning",
@@ -261,16 +255,16 @@ function Treatment() {
                     .then((res) => {
                       console.log(res);
                       getData();
+                      Swal.fire({
+                        title: "Treatment created",
+                        icon: "success",
+                        iconColor: "#d0e9e7",
+                        confirmButtonColor: "#447695",
+                      });
                     })
                     .catch((err) => {
                       console.log(err.message);
                     });
-                  Swal.fire({
-                    title: "Treatment created",
-                    icon: "success",
-                    iconColor: "#d0e9e7",
-                    confirmButtonColor: "#447695",
-                  });
                 }
               }}
             >
@@ -308,13 +302,13 @@ function Treatment() {
               defaultValue={DataById.nbr_of_tooth}
               onChange={handelChangeEdit}
             />
-            <label htmlFor="appointment"> Appointment</label>
+            {/* <label htmlFor="appointment"> Appointment</label>
             <TextField
               type="text"
               name="appointment"
               defaultValue={DataById.appointment}
               onChange={handelChangeEdit}
-            />
+            /> */}
 
             <Button variant="outlined" onClick={EditData}>
               Edit Treatment
