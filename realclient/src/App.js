@@ -5,6 +5,7 @@ import Dashboard from "../src/pages/Dashboard/dashboard"
 import Transaction from "../src/pages/transaction/transaction"
 import Login from "../src/pages/login/logins"
 import Patient from "../src/pages/patients/patient"
+import Treatment from './pages/Treatment/treatment'
 import Layout from "../src/components/layout"
 import RequireAuth from './components/RequireAuth'
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="Assistant" element={<Assistant />} />
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Patient" element={<Patient />} />
+          <Route path="Treatment" element={<Treatment />} />
           <Route path="Transaction" element={<Transaction />} />
       </Route>
     </Routes>
