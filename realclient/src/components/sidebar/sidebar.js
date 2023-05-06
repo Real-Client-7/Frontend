@@ -6,8 +6,9 @@ import { TbFileTime } from "react-icons/tb";
 import { MdPeopleAlt } from "react-icons/md";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
-import {BsFillArrowRightCircleFill, BsWindowSidebar} from "react-icons/bs"
+import {BsFillArrowRightCircleFill} from "react-icons/bs"
 import {BsFillArrowLeftCircleFill} from "react-icons/bs"
+import {TbDental} from "react-icons/tb"
 import image from "../image/dc-Bassam.jpeg"
 import Assitant from "../image/Assitant.jpeg"
 import { useState } from "react";
@@ -30,7 +31,7 @@ const links = [
     {
         path: "/treatment",
         name: "Treatment",
-        icon: <MdGroups2 />,
+        icon: <TbDental />,
         id: 3,
     },
     {
@@ -75,10 +76,16 @@ const linksAssitant = [
         id: 3,
     },
     {
+        path: "/treatment",
+        name: "Treatment",
+        icon: <TbDental/>,
+        id: 4,
+    },
+    {
         path: "/transaction",
         name: "Transactions",
         icon: <AiOutlineTransaction />,
-        id: 4,
+        id: 5,
     },
 ];
 
