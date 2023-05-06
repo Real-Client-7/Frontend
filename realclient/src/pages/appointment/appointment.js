@@ -1,9 +1,9 @@
 import MUIDataTable from "mui-datatables";
 import ".././transaction/incom/incom.css";
 import "../appointment/appointment.css"
-import { useEffect, useState ,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { TextField, Button,Select,MenuItem } from "@mui/material";
+import { TextField, Button, Select, MenuItem } from "@mui/material";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
@@ -13,28 +13,28 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Appointment() {
 
-    const URL =useContext(Url)
+    const URL = useContext(Url)
     const [Data, setData] = useState(null);
-    const[DataPatient ,setDataPatient] = useState(null)
-    const[DataTreatment ,setDataTreatments] = useState(null)
+    const [DataPatient, setDataPatient] = useState(null)
+    const [DataTreatment, setDataTreatments] = useState(null)
     const [DataById, setDataById] = useState({
-        patient:"",
+        patient: "",
         date: "",
-        note:"",
-        treatments:"",
-        total:"",
-        nbr:''
-   
+        note: "",
+        treatments: "",
+        total: "",
+        nbr: ''
+
     });
 
     const [DataPost, SetPostData] = useState({
-        patient:"",
+        patient: "",
         date: "",
-        note:"",
-        treatments:"",
-        total:"",
-        nbr:''
-     
+        note: "",
+        treatments: "",
+        total: "",
+        nbr: ''
+
     });
     const [DataEdit, SetEditData] = useState();
 
@@ -51,12 +51,12 @@ function Appointment() {
     const [iconAdd, isShowIconAdd] = useState(true);
 
     const restDataPost = {
-        patient:"",
+        patient: "",
         date: "",
-        note:"",
-        treatments:"",
-        total:"",
-        nbr:''
+        note: "",
+        treatments: "",
+        total: "",
+        nbr: ''
     }
 
     const showAdd = () => {
@@ -96,7 +96,7 @@ function Appointment() {
         rowsPerPage: 5,
         loaded: true,
         rowsPerPageOptions: [5], // this to specifique rows in page
-        
+
     };
 
     const columns = [
@@ -112,43 +112,46 @@ function Appointment() {
             name: "patient",
             label: "Patient",
             options: {
-                customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
-            }},
+                customBodyRender: (value) => value ? `${value.first_name} ${value.last_name}` : "this Patient is deleted",
+            }
+        },
 
         {
             name: "date",
             label: "Date",
             options: {
                 customBodyRender: (value) => {
-                  const date = new Date(value);
-                  const year = date.getFullYear();
-                  const month = date.getMonth() + 1;
-                  const day = date.getDate();
-                  const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
-                  return formattedDate;
+                    const date = new Date(value);
+                    const year = date.getFullYear();
+                    const month = date.getMonth() + 1;
+                    const day = date.getDate();
+                    const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
+                    return formattedDate;
                 },
-              },
+            },
         },
         {
             name: "treatments",
             label: "Treatment",
             options: {
-                customBodyRender: (value) => value? value.type : "dont have treatment",
+                customBodyRender: (value) => value ? value.type : "dont have treatment",
 
-            }},
+            }
+        },
 
-            {
+        {
             name: "nbroftooth",
-            label: "Tooth"},
+            label: "Tooth"
+        },
         {
             name: "note",
             label: "Note",
         },
         {
-            name : "total",
-            lable:"Total"
+            name: "total",
+            lable: "Total"
         },
-    
+
         {
             name: "actions",
             label: "Actions",
@@ -164,17 +167,17 @@ function Appointment() {
                                     sx={{ height: "40px" }}
                                     onClick={() => {
                                         axios
-                                        .get(`${URL}/appointment/getAppoitment/${tableMeta.rowData[0]}`)
-                                        .then((response) => {
-                                            setDataById(response.data);
-                                            setId(tableMeta.rowData[0]);
-                                            show();
-                                            showiconAdd();
-                                            showEdit();
-                                        })
-                                        .catch((err) => {
-                                            console.log(err.message);
-                                        });
+                                            .get(`${URL}/appointment/getAppoitment/${tableMeta.rowData[0]}`)
+                                            .then((response) => {
+                                                setDataById(response.data);
+                                                setId(tableMeta.rowData[0]);
+                                                show();
+                                                showiconAdd();
+                                                showEdit();
+                                            })
+                                            .catch((err) => {
+                                                console.log(err.message);
+                                            });
                                         console.log(DataById)
                                     }}
                                 >
@@ -184,32 +187,32 @@ function Appointment() {
                             <Button
                                 sx={{ height: "40px" }}
                                 onClick={() => {
-                                        Swal.fire({
-                                            title: 'Are you sure?',
-                                            text: "You won't be able to revert this!",
-                                            icon: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#447695',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Yes, delete it!'
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                    axios
-                                                        .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
-                                                        .then((response) => {
-                                                            console.log(response.data.message);
-                                                            toast.success("Deleted successful")
-                                                            getData();
-                                                            
-                                                        })
-                                                        .catch((err) => {
-                                                            toast.error(`${err.message}`)
-                                                            console.log(err.message);
-                                                        });
-                                            }
-                                        })
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "You won't be able to revert this!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#447695',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, delete it!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            axios
+                                                .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
+                                                .then((response) => {
+                                                    console.log(response.data.message);
+                                                    toast.success("Deleted successful")
+                                                    getData();
+
+                                                })
+                                                .catch((err) => {
+                                                    toast.error(`${err.message}`)
+                                                    console.log(err.message);
+                                                });
+                                        }
+                                    })
                                 }
-                            }
+                                }
                             >
                                 <MdDelete />
                             </Button>
@@ -251,13 +254,13 @@ function Appointment() {
                 console.log(err.message);
             });
     };
-console.log(DataPatient)
+    console.log(DataPatient)
 
     useEffect(() => {
         getData();
         getDataPatient()
         getDataTreatments()
-    },[]);
+    }, []);
 
     const handelChangePost = (e) => {
         const value = e.target.value;
@@ -318,7 +321,7 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangePost}
                         >
-                            {DataPatient.map((ele)=>{
+                            {DataPatient.map((ele) => {
                                 return <MenuItem value={ele._id} >{`${ele.first_name} ${ele.last_name}`}</MenuItem>
                             })}
                         </Select>
@@ -328,8 +331,8 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangePost}
                         >
-                            {DataTreatment.map((ele)=>{
-                                return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
+                            {DataTreatment.map((ele) => {
+                                return <MenuItem value={ele._id} >{ele.type}</MenuItem>
                             })}
 
                         </Select>
@@ -340,17 +343,17 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangePost}
                         />
-                        <div className="Bill">
+
                         <label htmlFor="total"> Tooth</label>
 
-                       <TextField
+                        <TextField
                             type="number"
                             name="nbroftooth"
                             required="required"
                             onChange={handelChangePost}
-                            inputProps={{ min: "11", max: "48" }}/>
+                            inputProps={{ min: "11", max: "48" }} />
 
-                            <div>
+
                         <label htmlFor="total"> Total</label>
                         <TextField
                             type="number"
@@ -358,41 +361,41 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangePost}
                         />
+
+                        <div>
+
                         </div>
                         <div>
-                   
-                        </div>
-                        <div>
-                   
-                        </div>
+
                         </div>
                         <label htmlFor="date"> Date</label>
                         <input type="datetime-local" required="required" name="date" onChange={handelChangePost} />
                         <Button
                             variant="outlined"
                             onClick={() => {
-                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
+                                if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.treatments === "") {
 
 
-                                                Swal.fire({
-                                                    title: 'field is Empty !',
-                                                    icon: 'warning',
-                                                    confirmButtonColor: '#447695',
-                                                })
-                                            } else {
-                                                axios
-                                                .post(`${URL}/appointment/addAppoitment`, DataPost)
-                                                .then((res) => {
-                                                    SetPostData(restDataPost)
-                                                    toast.success("Created successful")
-                                                    getData();
-                                                })
-                                                .catch((err) => {
-                                                    console.log(err.message); 
-                                                    toast.success(`${err.message}`)  
-                                                });
-                                            }}
-                                        }
+                                    Swal.fire({
+                                        title: 'field is Empty !',
+                                        icon: 'warning',
+                                        confirmButtonColor: '#447695',
+                                    })
+                                } else {
+                                    axios
+                                        .post(`${URL}/appointment/addAppoitment`, DataPost)
+                                        .then((res) => {
+                                            SetPostData(restDataPost)
+                                            toast.success("Created successful")
+                                            getData();
+                                        })
+                                        .catch((err) => {
+                                            console.log(err.message);
+                                            toast.success(`${err.message}`)
+                                        });
+                                }
+                            }
+                            }
                         >
                             Submit
                         </Button>
@@ -420,8 +423,8 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangeEdit}
                         >
-                            {DataPatient.map((ele)=>{
-                                return <MenuItem  value={ele._id} >{`${ele.first_name} ${ele.last_name}`}</MenuItem>
+                            {DataPatient.map((ele) => {
+                                return <MenuItem value={ele._id} >{`${ele.first_name} ${ele.last_name}`}</MenuItem>
                             })}
                         </Select>
                         <label htmlFor="treatment"> Treatment</label>
@@ -430,25 +433,25 @@ console.log(DataPatient)
                             required="required"
                             onChange={handelChangeEdit}
                         >
-                            {DataTreatment.map((ele)=>{
-                                return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
+                            {DataTreatment.map((ele) => {
+                                return <MenuItem value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
 
                         <label htmlFor="note"> Note</label>
-                        <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
-                        <div className="Bill">
+                        <TextField type="text" name="note" defaultValue={DataById.note} onChange={handelChangeEdit} />
 
 
-                            <div>
-                            <label htmlFor="total"> Tooth</label>
 
-<TextField
-     type="number"
-     name="nbroftooth"
-     required="required"
-     onChange={handelChangeEdit}
-     inputProps={{ min: "11", max: "48" }}/>
+
+                        <label htmlFor="total"> Tooth</label>
+
+                        <TextField
+                            type="number"
+                            name="nbroftooth"
+                            onChange={handelChangeEdit}
+                            defaultValue={DataById.nbr}
+                            inputProps={{ min: "11", max: "48" }} />
                         <label htmlFor="total"> Total</label>
                         <TextField
                             type="number"
@@ -456,13 +459,12 @@ console.log(DataPatient)
                             onChange={handelChangeEdit}
                             defaultValue={DataById.total}
                         />
-                        </div>
-                        <div>
-                 
-                        </div>
+
                         <div>
 
                         </div>
+                        <div>
+
                         </div>
                         <label htmlFor="date"> Date</label>
                         <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
@@ -472,7 +474,7 @@ console.log(DataPatient)
                     </form>
                 )}
             </div>
-            <div className="income_table" style={{height:"83vh"}}>
+            <div className="income_table" style={{ height: "83vh" }}>
                 <div className="table_mui">
                     <MUIDataTable
                         columns={columns}
@@ -492,7 +494,7 @@ console.log(DataPatient)
                             )
                         }
                     />
-                    <ToastContainer/>
+                    <ToastContainer />
                 </div>
             </div>
         </div>

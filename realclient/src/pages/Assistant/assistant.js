@@ -287,6 +287,7 @@ function Assistant() {
                     .then((res) => {
                       console.log(res);
                       getData();
+                      
                     })
                     .catch((err) => {
                       console.log(err.message);

@@ -257,7 +257,7 @@ function Treatment() {
                         icon: "success",
                         iconColor: "#d0e9e7",
                         confirmButtonColor: "#447695",
-                      });
+                      })
                     })
                     .catch((err) => {
                       console.log(err.message);
