@@ -2,23 +2,23 @@ import { useState } from "react";
 import "../transaction/transaction.css"
 import Debt from "./debt/debt";
 import Expenses from "./expense/expense";
-import Incom from "./incom/incom";
+import Income from "./incom/incom";
 
 
 
 
 
 function Transaction() {
-    const [valueSelect , setValueSelect] = useState("Incom")
-    const [page , setPage] = useState(<Incom/>)
+    const [valueSelect , setValueSelect] = useState("Income")
+    const [page , setPage] = useState(<Income/>)
 
     const handelChange =(e)=>{
         setValueSelect(e.target.value)
     }
 
     const switchBetweenPge = ()=>{
-        if (valueSelect === "Incom"){
-            setPage(<Incom/>)
+        if (valueSelect === "Income"){
+            setPage(<Income/>)
         }else if (valueSelect === "Debt"){
             setPage(<Debt/>)
         }
@@ -33,7 +33,7 @@ function Transaction() {
             <div className="heder-tools">
                     <span>{valueSelect}</span>
                     <select name="transaction" onClick={switchBetweenPge} onChange={handelChange}>
-                        <option value="Incom"  >Incom</option>
+                        <option value="Income"  >Income</option>
                         <option  value="Expenses" > Expenses</option>
                         <option value="Debt">Debt</option>
                     </select>

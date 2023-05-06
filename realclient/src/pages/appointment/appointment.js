@@ -12,6 +12,7 @@ import { Url } from "../../components/layout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Appointment() {
+
     const URL =useContext(Url)
     const [Data, setData] = useState(null);
     const[DataPatient ,setDataPatient] = useState(null)
@@ -22,8 +23,7 @@ function Appointment() {
         note:"",
         treatments:"",
         total:"",
-        paid:"",
-        rest:""
+   
     });
 
     const [DataPost, SetPostData] = useState({
@@ -31,9 +31,8 @@ function Appointment() {
         date: "",
         note:"",
         treatments:"",
-        total:"",
-        paid:"",
-        rest:""
+        total:""
+     
     });
     const [DataEdit, SetEditData] = useState();
 
@@ -51,13 +50,10 @@ function Appointment() {
 
     const restDataPost = {
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
-        total:"",
-        paid:"",
-        rest:""
+        total:""
     }
 
     const showAdd = () => {
@@ -115,6 +111,7 @@ function Appointment() {
             options: {
                 customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
             }},
+
         {
             name: "date",
             label: "Date",
@@ -124,6 +121,7 @@ function Appointment() {
             label: "Treatment",
             options: {
                 customBodyRender: (value) => value? value.type : "dont have treatment",
+
             }},
         {
             name: "note",
@@ -132,14 +130,6 @@ function Appointment() {
         {
             name : "total",
             lable:"Total"
-        },
-        {
-            name : "paid",
-            lable:"Paid"
-        },
-        {
-            name : "rest",
-            lable:"Rest"
         },
         {
             name: "actions",
@@ -342,22 +332,10 @@ console.log(DataPatient)
                         />
                         </div>
                         <div>
-                        <label htmlFor="paid"> Paid</label>
-                        <TextField
-                            type="number"
-                            name="paid"
-                            required="required"
-                            onChange={handelChangePost}
-                        />
+                   
                         </div>
                         <div>
-                        <label htmlFor="rest"> Rest</label>
-                        <TextField
-                            type="number"
-                            name="rest"
-                            onChange={handelChangePost}
-                            
-                        />
+                   
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
@@ -366,6 +344,8 @@ console.log(DataPatient)
                             variant="outlined"
                             onClick={() => {
                                             if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
+
+
                                                 Swal.fire({
                                                     title: 'field is Empty !',
                                                     icon: 'warning',
@@ -426,6 +406,7 @@ console.log(DataPatient)
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
+
                         <label htmlFor="note"> Note</label>
                         <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
                         <div className="Bill">
@@ -439,22 +420,10 @@ console.log(DataPatient)
                         />
                         </div>
                         <div>
-                        <label htmlFor="paid"> Paid</label>
-                        <TextField
-                            type="number"
-                            name="paid"
-                            onChange={handelChangeEdit}
-                            defaultValue={DataById.paid}
-                        />
+                 
                         </div>
                         <div>
-                        <label htmlFor="rest"> Rest</label>
-                        <TextField
-                            type="number"
-                            name="rest"
-                            defaultValue={DataById.rest}
-                            onChange={handelChangeEdit}
-                        />
+
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
