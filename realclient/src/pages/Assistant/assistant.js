@@ -2,7 +2,7 @@ import MUIDataTable from "mui-datatables";
 import "../../pages/transaction/incom/incom.css";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button ,Select ,MenuItem } from "@mui/material";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
@@ -95,6 +95,17 @@ function Assistant() {
     {
       name: "isSuperAdmin",
       label: "Role",
+
+      label: "isSuperAdmin",
+      options: { 
+        customBodyRender:(value)=>{
+          if (value === true){
+            return "Admin"
+          }else{
+            return "Assistant"
+          }
+        }
+      }
     },
     {
       name: "actions",
@@ -242,18 +253,20 @@ function Assistant() {
             />
             <label htmlFor="password"> Password</label>
             <TextField
-              type="number"
+              type="text"
               required="required"
               name="password"
               onChange={handelChangePost}
             />
-            <label htmlFor="isSuperAdmin"> IsSuperAdmin</label>
-            <TextField
+            <label htmlFor="isSuperAdmin"> Role</label>
+            <Select
               type="text"
-              required="required"
               name="isSuperAdmin"
               onChange={handelChangePost}
-            />
+            >
+              <MenuItem value={true} > Admin </MenuItem>
+              <MenuItem value={false} > Assistant </MenuItem>
+            </Select>
             <Button
               variant="outlined"
               onClick={() => {
@@ -328,13 +341,16 @@ function Assistant() {
               defaultValue={DataById.password}
               onChange={handelChangeEdit}
             />
-            <label htmlFor="isSuperAdmin"> IsSuperAdmin</label>
-            <TextField
+            <label htmlFor="isSuperAdmin"> Role</label>
+            <Select
               type="text"
               name="isSuperAdmin"
               defaultValue={DataById.isSuperAdmin}
               onChange={handelChangeEdit}
-            />
+            >
+              <MenuItem value={true} > Admin </MenuItem>
+              <MenuItem value={false} > Assistant </MenuItem>
+            </Select>
             <Button variant="outlined" onClick={EditData}>
               Edit Admin
             </Button>
