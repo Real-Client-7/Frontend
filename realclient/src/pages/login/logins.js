@@ -39,7 +39,9 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post(`http://localhost:4600/admin/login`, {
+
+      const response = await axios.post('http://localhost:4600/admin/login', {
+
         email,
         password,
         headers: { "content-type": "application/json" },

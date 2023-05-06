@@ -13,4 +13,7 @@
     .form_patient {
       grid-template-columns: repeat(2, 1fr); 
     }
+    .form-add-income{
+        width: 100%;
+    }
 }

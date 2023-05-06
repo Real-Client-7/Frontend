@@ -27,8 +27,11 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 82%;
+    width: 80.4%;
     float: right;
+}
+.HeigthofPage{
+    height: 100vh;
 }
 
 @media only screen and (max-width: 600px) {
@@ -39,4 +42,12 @@
         display: flex;
         flex-direction: column;
     }
+    .right_side-on-6{
+        width: 100%;
+        height: 100vh;
+    }
+    .HeigthofPage{
+        height: unset;
+    }
+    
   }

@@ -32,7 +32,7 @@ function PatienBox() {
     <div className="Patient_box">
       <div className="viewAndNmbr">
       <span> {!Data?<Loader/> : Data.length} </span>
-      <button onClick={Toggel}><ImEye/></button>
+      {Data && <button onClick={Toggel}><ImEye/></button>}
       </div>
       <div>
       <h2>Total patient</h2>

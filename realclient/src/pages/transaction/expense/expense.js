@@ -8,6 +8,8 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../../components/layout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Expense() {
   const URL =useContext(Url)
@@ -138,6 +140,7 @@ function Expense() {
                       .delete(`${URL}/expense/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         console.log(response.data.message);
+                        toast.success("Deleted expense successful")
                         getData();
                       })
                       .catch((err) => {
@@ -185,10 +188,13 @@ console.log(DataById)
       .put(`${URL}/expense/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
+        toast.success("Updated expense successful")
         getData();
+        
       })
       .catch((err) => {
         console.log(err);
+        toast.success(`${err.message}`)
       });
   };
 
@@ -321,6 +327,8 @@ console.log(DataById)
               )
             }
           />
+                  <ToastContainer />
+
         </div>
       </div>
     </div>

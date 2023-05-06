@@ -47,9 +47,6 @@ function PatientPopUp(props) {
                                         <div className="info-patient">
                                             <div className="head-ofCard">
                                             <h3>{`${ele.first_name } ${ele.middle_name} ${ele.last_name}`}</h3>
-                                            <button className="icon-eyes-button">
-                                            <ImEye className="icon-eyes"/>
-                                            </button>
                                             </div>
                                             <p>
                                                 {" "}
