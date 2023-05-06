@@ -40,3 +40,14 @@
     justify-content: space-between;
     margin-right: 40px;
 }
+
+@media only screen and (max-width: 600px) {
+    .Appoitment_box{
+        width: 100%;
+        height: 170px;
+    }
+    .Appoitment_box div h2{
+        font-size: 24px;
+    }
+
+}

@@ -9,14 +9,15 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../components/layout";
-function Income() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+function Appointment() {
     const URL =useContext(Url)
     const [Data, setData] = useState(null);
     const[DataPatient ,setDataPatient] = useState(null)
     const[DataTreatment ,setDataTreatments] = useState(null)
     const [DataById, setDataById] = useState({
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
@@ -27,7 +28,6 @@ function Income() {
 
     const [DataPost, SetPostData] = useState({
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
@@ -116,10 +116,6 @@ function Income() {
                 customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
             }},
         {
-            name: "time",
-            label: "Time",
-        },
-        {
             name: "date",
             label: "Date",
         },
@@ -127,7 +123,7 @@ function Income() {
             name: "treatments",
             label: "Treatment",
             options: {
-                customBodyRender: (value) => value.type ,
+                customBodyRender: (value) => value? value.type : "dont have treatment",
             }},
         {
             name: "note",
@@ -194,9 +190,12 @@ function Income() {
                                                         .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
                                                         .then((response) => {
                                                             console.log(response.data.message);
+                                                            toast.success("Deleted successful")
                                                             getData();
+                                                            
                                                         })
                                                         .catch((err) => {
+                                                            toast.error(`${err.message}`)
                                                             console.log(err.message);
                                                         });
                                             }
@@ -267,10 +266,12 @@ console.log(DataPatient)
             .put(`${URL}/appointment/update/${Id}`, DataEdit)
             .then((res) => {
                 console.log(res);
+                toast.success("Updated successful")
                 getData();
             })
             .catch((err) => {
                 console.log(err);
+                toast.error(`${err.message}`)
             });
     };
 
@@ -323,13 +324,6 @@ console.log(DataPatient)
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
-                        <label htmlFor="time"> Time</label>
-                        <TextField
-                            type="text"
-                            name="time"
-                            required="required"
-                            onChange={handelChangePost}
-                        />
                         <label htmlFor="note"> Note</label>
                         <TextField
                             type="text"
@@ -371,7 +365,7 @@ console.log(DataPatient)
                         <Button
                             variant="outlined"
                             onClick={() => {
-                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.time === "" || DataPost.treatments === "") {
+                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
                                                 Swal.fire({
                                                     title: 'field is Empty !',
                                                     icon: 'warning',
@@ -381,17 +375,13 @@ console.log(DataPatient)
                                                 axios
                                                 .post(`${URL}/appointment/addAppoitment`, DataPost)
                                                 .then((res) => {
-                                                    Swal.fire({
-                                                        title: 'Income created',
-                                                        icon: "success",
-                                                        iconColor: "#d0e9e7",
-                                                        confirmButtonColor: '#447695',
-                                                    })
                                                     SetPostData(restDataPost)
+                                                    toast.success("Created successful")
                                                     getData();
                                                 })
                                                 .catch((err) => {
-                                                    console.log(err.message);
+                                                    console.log(err.message); 
+                                                    toast.success(`${err.message}`)  
                                                 });
                                             }}
                                         }
@@ -436,13 +426,6 @@ console.log(DataPatient)
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
-                        <label htmlFor="time">Time</label>
-                        <TextField
-                            type="text"
-                            name="time"
-                            onChange={handelChangeEdit}
-                            defaultValue={DataById.time}
-                        />
                         <label htmlFor="note"> Note</label>
                         <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
                         <div className="Bill">
@@ -502,10 +485,11 @@ console.log(DataPatient)
                             )
                         }
                     />
+                    <ToastContainer/>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Income;
+export default Appointment;

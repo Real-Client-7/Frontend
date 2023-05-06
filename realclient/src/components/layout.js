@@ -3,11 +3,12 @@ import Header from './header/header';
 import SideBar from './sidebar/sidebar'
 import {useState,useContext,createContext} from  "react"
  import "../App.css"
+
  export const Url = createContext()
 
 function Layout({ children }) {
   const [expanded , setExpanded] = useState(false)
-  const URL = "http://localhost:8001"
+  const URL = "http://localhost:4600"
   return (
     <main className="App">
       <SideBar isCollaps ={setExpanded} Collaps = {expanded}/>
@@ -16,7 +17,7 @@ function Layout({ children }) {
               <div className='Header'>
             <Header />
               </div>
-              <div style={{margin : "20px 20px 20px 20px" , height:"100%" ,backgroundColor:"#f6f6f6" , borderRadius:"20px"}}>
+              <div className='HeigthofPage' style={{margin : "20px 20px 20px 20px" ,backgroundColor:"#f6f6f6" , borderRadius:"20px"}}>
                 <Url.Provider value={URL}>
                  {children}
                 </Url.Provider>

@@ -9,6 +9,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
 import {BsFillArrowLeftCircleFill} from "react-icons/bs"
 import image from "../image/dc-Bassam.jpeg"
+import Assitant from "../image/Assitant.jpeg"
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -46,9 +47,39 @@ const links = [
     },
 ];
 
+
+const linksAssitant = [
+    {
+        path: "/dashboard",
+        name: "Dashboard",
+        icon: <MdSpaceDashboard />,
+        id: 1,
+    },
+    {
+        path: "/patient",
+        name: "Patients",
+        icon: <MdGroups2 />,
+        id: 2,
+    },
+    {
+        path: "/appointment",
+        name: "Appointments",
+        icon: <TbFileTime />,
+        id: 3,
+    },
+    {
+        path: "/transaction",
+        name: "Transactions",
+        icon: <AiOutlineTransaction />,
+        id: 4,
+    },
+];
+
+
 function SideBar(props) {
 
 
+   
 
     const iscollaps = ()=>{
         props.isCollaps(!props.Collaps)
@@ -65,6 +96,8 @@ function SideBar(props) {
     const [show , setShow] = useState(true)
     const [iconBtn ,seticoneBTn]=useState(<BsFillArrowLeftCircleFill/>)
     const [width ,setwidth] = useState(true)
+
+    let IsSuper = localStorage.getItem("super-admin")
 
     function sideCollaps(){
         let element = document.querySelector(".Side_bar")
@@ -101,13 +134,13 @@ function SideBar(props) {
             {show &&<div className="Dc_info">
                     <h1>MEC</h1>
                     <div className="image_containt">
-                        <img src={image} alt="Dc-Bassem" />
+                        <img src={IsSuper === "true" ? image:Assitant} alt="Dc-Bassem" />
                     </div>
-                    <h2>Dr. Bassem El-Monla</h2>
+                    <h2>{IsSuper==="true"?"Dr. Bassem El-Monla":"Assistant"}</h2>
                 </div>}
             </div>
             <div className="side_links">
-                {links.map((ele) => {
+                {(IsSuper==="true" ? links:linksAssitant).map((ele) => {
                     return (
                         <NavLink
                         to={ele.path} className={"navlink"} key={ele.id}

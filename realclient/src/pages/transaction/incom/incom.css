@@ -53,3 +53,16 @@
     font-size: 30px;
 }
 
+@media only screen and (max-width: 600px){
+    .incomss{
+        margin-top:10px ;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .income_table{
+        justify-content: start;
+        margin-top: 20px;
+        height: auto;
+    }
+}

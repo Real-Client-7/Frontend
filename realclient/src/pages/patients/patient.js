@@ -2,15 +2,17 @@ import MUIDataTable from "mui-datatables";
 import "../transaction/incom/incom.css";
 import { useEffect, useState,useContext } from "react";
 import axios from "axios";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button ,Select ,MenuItem } from "@mui/material";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../components/layout";
 import "./patient.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Expense() {
+function Patient() {
   const URL =useContext(Url)
   const [Data, setData] = useState(null);
   const [DataById, setDataById] = useState({
@@ -199,6 +201,7 @@ function Expense() {
                       .delete(`${URL}/patient/deletePatient/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         console.log(response.data);
+                        toast.success("Deleted Patient successful")
                         getData();
                       })
                       .catch((err) => {
@@ -247,16 +250,12 @@ console.log(DataById)
       .put(`${URL}/patient/editPatient/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
+        toast.success("Updated patient sucss")
         getData();
-        Swal.fire({
-          title:'Patient Updated',
-          icon :"success",
-          iconColor : "#d0e9e7",
-          confirmButtonColor: '#447695',
-        })
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); 
+        toast.error(`${err.message}`)
       });
   };
 
@@ -275,7 +274,7 @@ console.log(DataById)
       <div className="none">
         {/* for add expense */}
         {visibleAdd && (
-          <form style={{width:"86%"}}>
+          <form>
             <div className="head-form">
               <h2>Add Patient</h2>
               <button
@@ -342,23 +341,29 @@ console.log(DataById)
               onChange={handelChangePost}
             />
             </div>
+
             <div className="input-lable">
             <label htmlFor="gender"> Gender</label>
-            <TextField
-              type="text"
+            <Select
               name="gender"
               required= "required"
               onChange={handelChangePost}
-            />
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
             </div>
             <div className="input-lable">
-            <label htmlFor="materialStatus"> Material status</label>
-            <TextField
+            <label htmlFor="marirtalStatus"> Marital status</label>
+            <Select
               type="text"
               name="maritalStatus"
-              required= "required"
               onChange={handelChangePost}
-            />
+            >
+              <MenuItem value="Singel">Single</MenuItem>
+              <MenuItem value="Married">Maried</MenuItem>
+              <MenuItem value="Engaged">Engaged</MenuItem>
+            </Select>
             </div>
             <div className="input-lable">
             <label htmlFor="occupation"> Occupation</label>
@@ -425,13 +430,8 @@ console.log(DataById)
                                     })
                                     .catch((err) => {
                                       console.log(err.message);
+                                      toast.error(`${err.message}`)
                                     });
-                                Swal.fire({
-                                  title:'Expense created',
-                                  icon :"success",
-                                  iconColor : "#d0e9e7",
-                                  confirmButtonColor: '#447695',
-                                })
                               }
                             }}
             >
@@ -441,7 +441,7 @@ console.log(DataById)
         )}
         {/* for edit expense */}
         {visibleEdit && (
-          <form style={{width:"86%"}}>
+          <form>
             <div className="head-form">
               <h2>Edit Patient </h2>
               <button
@@ -509,21 +509,28 @@ console.log(DataById)
             </div>
             <div className="input-lable">
             <label htmlFor="gender"> Gender</label>
-            <TextField
-              type="text"
+            <Select
               name="gender"
+              required= "required"
               defaultValue={DataById.gender}
               onChange={handelChangeEdit}
-            />
+            >
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
             </div>
             <div className="input-lable">
             <label htmlFor="materialStatus"> Material status</label>
-            <TextField
+            <Select
               type="text"
               name="maritalStatus"
               defaultValue={DataById.maritalStatus}
               onChange={handelChangeEdit}
-            />
+            >
+              <MenuItem value="Singel">Single</MenuItem>
+              <MenuItem value="Married">Maried</MenuItem>
+              <MenuItem value="Engaged">Engaged</MenuItem>
+            </Select>
             </div>
             <div className="input-lable">
             <label htmlFor="occupation"> Occupation</label>
@@ -599,10 +606,11 @@ console.log(DataById)
               )
             }
           />
+          <ToastContainer/>
         </div>
       </div>
     </div>
   );
 }
 
-export default Expense;
+export default Patient;

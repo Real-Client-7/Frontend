@@ -53,3 +53,23 @@
     color: var(--darkBlue);
     margin-left: 20px;
 }
+
+@media only screen and (max-width: 600px){
+    .heder-of-page{
+        width: 90%;
+        border-radius:10px;
+        
+    }
+    .heder-tools{
+    justify-content: space-between;
+    margin-right:5px ;
+    }
+    .tabels-transaction{
+        width: 90%;
+        height: 100vh;
+    }
+    .transaction{
+        height: 100vh;
+        justify-content: start;
+    }
+}
