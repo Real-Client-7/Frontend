@@ -27,22 +27,28 @@ const links = [
         id: 2,
     },
     {
+        path: "/treatment",
+        name: "Treatment",
+        icon: <MdGroups2 />,
+        id: 3,
+    },
+    {
         path: "/appointment",
         name: "Appointments",
         icon: <TbFileTime />,
-        id: 3,
+        id: 4,
     },
     {
         path: "/assistant",
         name: "Assistants",
         icon: <MdPeopleAlt />,
-        id: 4,
+        id: 5,
     },
     {
         path: "/transaction",
         name: "Transactions",
         icon: <AiOutlineTransaction />,
-        id: 5,
+        id: 6,
     },
 ];
 

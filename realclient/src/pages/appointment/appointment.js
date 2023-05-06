@@ -9,7 +9,7 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../components/layout";
-function Income() {
+function Appoitment () {
     const URL =useContext(Url)
     const [Data, setData] = useState(null);
     const[DataPatient ,setDataPatient] = useState(null)
@@ -453,4 +453,4 @@ console.log(DataPatient)
     );
 }
 
-export default Income;
+export default Appoitment ;
