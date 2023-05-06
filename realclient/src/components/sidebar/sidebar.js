@@ -6,7 +6,7 @@ import { TbFileTime } from "react-icons/tb";
 import { MdPeopleAlt } from "react-icons/md";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
-import {BsFillArrowRightCircleFill} from "react-icons/bs"
+import {BsFillArrowRightCircleFill, BsWindowSidebar} from "react-icons/bs"
 import {BsFillArrowLeftCircleFill} from "react-icons/bs"
 import image from "../image/dc-Bassam.jpeg"
 import { useState } from "react";
@@ -45,6 +45,21 @@ const links = [
         id: 5,
     },
 ];
+
+function handleLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("super-admin");
+  window.location.href = "/login";
+}
+
+setTimeout(function() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("super-admin");
+    window.location.href = "/login";
+
+  }, 8 * 60 * 60 * 1000);
+
+  //1 * 60  * 1000)
 
 function SideBar(props) {
 
@@ -122,8 +137,8 @@ function SideBar(props) {
                 })}
             </div>
             <div className="base_bar">
-                <button className="logout">
-                    <MdOutlineLogout />
+            <button className="logout" onClick={handleLogout}>
+                                    <MdOutlineLogout />
                     {show && <span>Logout</span>}
                 </button>
             </div>

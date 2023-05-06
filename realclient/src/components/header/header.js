@@ -4,6 +4,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { BsClock } from "react-icons/bs";
 import { useEffect } from "react";
 
+
 let datenow = new Date()
 let month = ["January","February" , "March" ,"April" , "May" , "June" , "July" , "August" , "September" , "October","November","December"]
 
@@ -39,7 +40,8 @@ function Header () {
                 </div>
             </div>
         </div>
-    </div>);
+    </div>
+    );
 }
 
 export default Header;

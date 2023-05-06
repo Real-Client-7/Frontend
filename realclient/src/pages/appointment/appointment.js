@@ -16,24 +16,20 @@ function Income() {
     const[DataTreatment ,setDataTreatments] = useState(null)
     const [DataById, setDataById] = useState({
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
         total:"",
-        paid:"",
-        rest:""
+   
     });
 
     const [DataPost, SetPostData] = useState({
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
-        total:"",
-        paid:"",
-        rest:""
+        total:""
+     
     });
     const [DataEdit, SetEditData] = useState();
 
@@ -51,13 +47,10 @@ function Income() {
 
     const restDataPost = {
         patient:"",
-        time: "",
         date: "",
         note:"",
         treatments:"",
-        total:"",
-        paid:"",
-        rest:""
+        total:""
     }
 
     const showAdd = () => {
@@ -115,10 +108,7 @@ function Income() {
             options: {
                 customBodyRender: (value) =>  value?`${value.first_name} ${value.last_name}`:"this Patient is deleted" ,
             }},
-        {
-            name: "time",
-            label: "Time",
-        },
+    
         {
             name: "date",
             label: "Date",
@@ -127,7 +117,7 @@ function Income() {
             name: "treatments",
             label: "Treatment",
             options: {
-                customBodyRender: (value) => value.type ,
+                customBodyRender: (value) => value? value.type : "don't have treatment" ,
             }},
         {
             name: "note",
@@ -136,14 +126,6 @@ function Income() {
         {
             name : "total",
             lable:"Total"
-        },
-        {
-            name : "paid",
-            lable:"Paid"
-        },
-        {
-            name : "rest",
-            lable:"Rest"
         },
         {
             name: "actions",
@@ -323,13 +305,6 @@ console.log(DataPatient)
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
-                        <label htmlFor="time"> Time</label>
-                        <TextField
-                            type="text"
-                            name="time"
-                            required="required"
-                            onChange={handelChangePost}
-                        />
                         <label htmlFor="note"> Note</label>
                         <TextField
                             type="text"
@@ -348,22 +323,10 @@ console.log(DataPatient)
                         />
                         </div>
                         <div>
-                        <label htmlFor="paid"> Paid</label>
-                        <TextField
-                            type="number"
-                            name="paid"
-                            required="required"
-                            onChange={handelChangePost}
-                        />
+                   
                         </div>
                         <div>
-                        <label htmlFor="rest"> Rest</label>
-                        <TextField
-                            type="number"
-                            name="rest"
-                            onChange={handelChangePost}
-                            
-                        />
+                   
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
@@ -371,7 +334,7 @@ console.log(DataPatient)
                         <Button
                             variant="outlined"
                             onClick={() => {
-                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.time === "" || DataPost.treatments === "") {
+                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.treatments === "") {
                                                 Swal.fire({
                                                     title: 'field is Empty !',
                                                     icon: 'warning',
@@ -436,13 +399,7 @@ console.log(DataPatient)
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
                         </Select>
-                        <label htmlFor="time">Time</label>
-                        <TextField
-                            type="text"
-                            name="time"
-                            onChange={handelChangeEdit}
-                            defaultValue={DataById.time}
-                        />
+            
                         <label htmlFor="note"> Note</label>
                         <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
                         <div className="Bill">
@@ -456,22 +413,10 @@ console.log(DataPatient)
                         />
                         </div>
                         <div>
-                        <label htmlFor="paid"> Paid</label>
-                        <TextField
-                            type="number"
-                            name="paid"
-                            onChange={handelChangeEdit}
-                            defaultValue={DataById.paid}
-                        />
+                 
                         </div>
                         <div>
-                        <label htmlFor="rest"> Rest</label>
-                        <TextField
-                            type="number"
-                            name="rest"
-                            defaultValue={DataById.rest}
-                            onChange={handelChangeEdit}
-                        />
+
                         </div>
                         </div>
                         <label htmlFor="date"> Date</label>
