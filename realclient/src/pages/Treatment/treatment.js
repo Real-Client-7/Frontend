@@ -81,10 +81,7 @@ function Treatment() {
       name: "type",
       label: "Type",
     },
-    {
-      name: "nbr_of_tooth",
-      label: "Nbr of tooth",
-    },
+  
     // {
     //   name: "appointment",
     //   label: "Appointment",

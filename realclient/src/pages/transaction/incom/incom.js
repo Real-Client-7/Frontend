@@ -17,11 +17,13 @@ function Income() {
   const [DataById, setDataById] = useState({
     Name: "",
     amount: "",
+    createdAt:""
  
   });
   const [DataPost, SetPostData] = useState({
     Name: "",
     amount: "",
+    createdAt:""
 
   });
   const [DataEdit, SetEditData] = useState(null);
@@ -102,8 +104,21 @@ function Income() {
       name: "amount",
       label: "Amount"   ,
     },
- 
-
+    {
+      name: "createdAt",
+      label: "Paid at",
+      options: {
+        customBodyRender: (value) => {
+          const date = new Date(value);
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1;
+          const day = date.getDate();
+          const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
+          return formattedDate;
+        },
+      },
+    },
+    
   
   ];
 console.log(Id)

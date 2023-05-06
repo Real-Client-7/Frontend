@@ -36,7 +36,7 @@ return (
     </div>
     <div>
     <h2>Today Appoitment</h2>
-    <p>increas 7% from last month</p>
+    <p></p>
     </div>
   </div>
     </> );

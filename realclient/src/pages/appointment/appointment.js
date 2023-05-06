@@ -23,6 +23,7 @@ function Appointment() {
         note:"",
         treatments:"",
         total:"",
+        nbr:''
    
     });
 
@@ -31,7 +32,8 @@ function Appointment() {
         date: "",
         note:"",
         treatments:"",
-        total:""
+        total:"",
+        nbr:''
      
     });
     const [DataEdit, SetEditData] = useState();
@@ -53,7 +55,8 @@ function Appointment() {
         date: "",
         note:"",
         treatments:"",
-        total:""
+        total:"",
+        nbr:''
     }
 
     const showAdd = () => {
@@ -115,6 +118,16 @@ function Appointment() {
         {
             name: "date",
             label: "Date",
+            options: {
+                customBodyRender: (value) => {
+                  const date = new Date(value);
+                  const year = date.getFullYear();
+                  const month = date.getMonth() + 1;
+                  const day = date.getDate();
+                  const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
+                  return formattedDate;
+                },
+              },
         },
         {
             name: "treatments",
@@ -123,6 +136,10 @@ function Appointment() {
                 customBodyRender: (value) => value? value.type : "dont have treatment",
 
             }},
+
+            {
+            name: "nbroftooth",
+            label: "Tooth"},
         {
             name: "note",
             label: "Note",
@@ -131,6 +148,7 @@ function Appointment() {
             name : "total",
             lable:"Total"
         },
+    
         {
             name: "actions",
             label: "Actions",
@@ -313,6 +331,7 @@ console.log(DataPatient)
                             {DataTreatment.map((ele)=>{
                                 return <MenuItem  value={ele._id} >{ele.type}</MenuItem>
                             })}
+
                         </Select>
                         <label htmlFor="note"> Note</label>
                         <TextField
@@ -322,6 +341,15 @@ console.log(DataPatient)
                             onChange={handelChangePost}
                         />
                         <div className="Bill">
+                        <label htmlFor="total"> Tooth</label>
+
+                       <TextField
+                            type="number"
+                            name="nbroftooth"
+                            required="required"
+                            onChange={handelChangePost}
+                            inputProps={{ min: "11", max: "48" }}/>
+
                             <div>
                         <label htmlFor="total"> Total</label>
                         <TextField
@@ -410,7 +438,17 @@ console.log(DataPatient)
                         <label htmlFor="note"> Note</label>
                         <TextField type="text" name="note"  defaultValue={DataById.note} onChange={handelChangeEdit} />
                         <div className="Bill">
+
+
                             <div>
+                            <label htmlFor="total"> Tooth</label>
+
+<TextField
+     type="number"
+     name="nbroftooth"
+     required="required"
+     onChange={handelChangeEdit}
+     inputProps={{ min: "11", max: "48" }}/>
                         <label htmlFor="total"> Total</label>
                         <TextField
                             type="number"

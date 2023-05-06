@@ -94,7 +94,7 @@ function Assistant() {
     },
     {
       name: "isSuperAdmin",
-      label: "isSuperAdmin",
+      label: "Role",
     },
     {
       name: "actions",

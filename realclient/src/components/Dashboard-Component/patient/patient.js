@@ -36,7 +36,7 @@ function PatienBox() {
       </div>
       <div>
       <h2>Total patient</h2>
-      <p>increas 7% from last month</p>
+      <p></p>
       </div>
     </div>
     {visible&&<PatientsPopUb Toggel = {Toggel} Data={Data} getDataPatient ={getDataPatient}/>}

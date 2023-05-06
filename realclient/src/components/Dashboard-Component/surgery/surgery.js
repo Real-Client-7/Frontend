@@ -31,7 +31,7 @@ return (
     </div>
     <div>
     <h2>Total surgeries</h2>
-    <p>increas 7% from last month</p>
+    <p></p>
     </div>
   </div>
     </> );
