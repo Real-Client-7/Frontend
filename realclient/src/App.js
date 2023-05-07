@@ -15,7 +15,6 @@ function App() {
       <Route path="Login" element={<Login />} />
 
       {/* protect routes */}
-
       <Route  path="/" element={<RequireAuth />}>
           <Route path="Appointment" element={<Appointment />} />
           <Route path="Admins" element={<Assistant />} />
