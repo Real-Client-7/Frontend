@@ -187,32 +187,34 @@ function Appointment() {
                             )}
                             <Button
                                 sx={{ height: "40px" }}
-                                onClick={() => {
-                                        Swal.fire({
-                                            title: 'Are you sure?',
-                                            text: "You won't be able to revert this!",
-                                            icon: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#447695',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Yes, delete it!'
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                    axios
-                                                        .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
-                                                        .then((response) => {
-                                                            console.log(response.data.message);
-                                                            toast.success("Appointment deleted successfully")
-                                                            getData();
-                                                            
-                                                        })
-                                                        .catch((err) => {
-                                                            toast.error(`${err.message}`)
-                                                            console.log(err.message);
-                                                        });
-                                            }
+                                 onClick={() =>
+                                    {
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "You won't be able to revert this!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#447695',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, delete it!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            axios
+                                                .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
+                                                .then((response) => {
+                                                    console.log(response.data.message);
+                                                    toast.success("Appointment deleted successfully")
+                                                    getData();
+
+                                                })
+                                                .catch((err) => {
+                                                    toast.error(`${err.message}`)
+                                                    console.log(err.message);
+                                                });
                                         }
-                                }
+                                    })
+                                }}
+                            
                             >
                                 <MdDelete />
                             </Button>
@@ -373,27 +375,28 @@ function Appointment() {
                         <Button
                             variant="outlined"
                             onClick={() => {
-                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
+                                if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.treatments === "") {
 
-                                                toast.warning("All the fields are required!")
+                                    toast.warning("All the fields are required!")
 
-                                            } else {
-                                                axios
-                                                .post(`${URL}/appointment/addAppoitment`, DataPost)
-                                                .then((res) => {
-                                                    SetPostData(restDataPost)
-                                                    toast.success("Appointment added successfully!")
-                                                    getData();
-                                                    show();
-                                                    showAdd();
-                                                    showicon();
-                                                })
-                                                .catch((err) => {
-                                                    console.log(err.message); 
-                                                    toast.success(`${err.message}`)  
-                                                });
-                                            }}
-                                        }
+                                } else {
+                                    axios
+                                        .post(`${URL}/appointment/addAppoitment`, DataPost)
+                                        .then((res) => {
+                                            SetPostData(restDataPost)
+                                            toast.success("Appointment added successfully!")
+                                            getData();
+                                            show();
+                                            showAdd();
+                                            showicon();
+                                        })
+                                        .catch((err) => {
+                                            console.log(err.message);
+                                            toast.success(`${err.message}`)
+                                        });
+                                }
+                            }
+                            }
                         >
                             Create
                         </Button>
@@ -466,12 +469,14 @@ function Appointment() {
                         </div>
                         <label htmlFor="date"> Date</label>
                         <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
-                        <Button variant="outlined" 
-                      onClick={()=>{EditData();
-                        show();
-                        showEdit();
-                        showiconAdd();
-                        SetEditData(null)}}>
+                        <Button variant="outlined"
+                            onClick={() => {
+                                EditData();
+                                show();
+                                showEdit();
+                                showiconAdd();
+                                SetEditData(null)
+                            }}>
                             Edit Appoitment
                         </Button>
                     </form>
