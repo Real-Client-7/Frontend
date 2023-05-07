@@ -24,7 +24,7 @@ function PatienBox() {
 
     useEffect(()=>{
         getDataPatient()
-    },[])
+    })
 
 
   return( 

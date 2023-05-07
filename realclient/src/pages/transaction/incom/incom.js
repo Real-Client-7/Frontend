@@ -3,10 +3,9 @@ import "../incom/incom.css";
 import { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import { TextField, Button,Select,MenuItem } from "@mui/material";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
+
 import Loader from "../../../components/loader/loder";
-import Swal from "sweetalert2"
+
 import { Url } from "../../../components/layout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,20 +15,14 @@ function Income() {
   const URL =useContext(Url)
   const [Data, setData] = useState();
   const[DataPatient ,setDataPatient] = useState(null)
-  const [DataById, setDataById] = useState({
-    Name: "",
-    amount: "",
-    createdAt:""
- 
-  });
+
   const [DataPost, SetPostData] = useState({
     Name: "",
     amount: "",
     createdAt:""
 
   });
-  const [DataEdit, SetEditData] = useState(null);
-  const [Id, setId] = useState();
+
 
   const getDataPatient = () => {
     axios
@@ -49,9 +42,9 @@ function Income() {
   };
 
   const [visibleAdd, isShowAdd] = useState(false);
-  const [visibleEdit, isShowEdit] = useState(false);
+
   const [iconEdit, isShowIcon] = useState(true);
-  const [iconAdd, isShowIconAdd] = useState(true);
+
 
   const showAdd = () => {
     if (visibleAdd === false) {
@@ -65,9 +58,7 @@ function Income() {
   const showicon = () => {
     iconEdit ? isShowIcon(false) : isShowIcon(true);
   };
-  const showiconAdd = () => {
-    iconAdd ? isShowIconAdd(false) : isShowIconAdd(true);
-  };
+
 
   const options = {
     filterType: "checkbox",
@@ -123,7 +114,7 @@ function Income() {
     
   
   ];
-console.log(Id)
+
 const getData = () => {
   axios.get(`${URL}/income/getIncome`)
     .then((response) => {
@@ -139,11 +130,11 @@ console.log(Data)
 useEffect(()=>{
   getData()
   getDataPatient()
-},[])
-console.log(DataById)
+})
+
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const handelChangePost = (e) => {
     const value = e.target.value;
@@ -227,7 +218,7 @@ console.log(DataById)
             data={Data}
             options={options}
             title={
-              iconAdd && (
+              (
                 <Button
                   onClick={() => {
                     show();

@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
+
 import Header from './header/header';
 import SideBar from './sidebar/sidebar'
-import {useState,useContext,createContext} from  "react"
+import {useState,createContext} from  "react"
  import "../App.css"
 
  export const Url = createContext()

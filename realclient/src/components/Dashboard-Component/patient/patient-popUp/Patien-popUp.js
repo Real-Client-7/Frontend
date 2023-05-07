@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+
 import "../patient.css";
 import { Input } from "@mui/material";
 import { useState } from "react";
-import {ImEye} from "react-icons/im"
+
 
 function PatientPopUp(props) {
     const [name, setName] = useState("");

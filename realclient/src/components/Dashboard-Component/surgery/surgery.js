@@ -21,7 +21,7 @@ console.log(Data)
 
 useEffect(()=>{
     getData()
-},[])
+})
 
 return ( 
     <>
