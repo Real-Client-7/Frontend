@@ -8,7 +8,6 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2";
 import { Url } from "../../components/layout";
-
 function Assistant() {
   const URL = useContext(Url);
   const [Data, setData] = useState(null);
