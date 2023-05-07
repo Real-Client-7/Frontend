@@ -6,8 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import img from "../login/loginimg.png"
-
-import Layout from "../../components/layout";
+import {useNavigate, useLocation } from 'react-router-dom';
 
 
 
@@ -17,9 +16,9 @@ function Login() {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [Token,setToken] = useState()
-
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/dashboard";
   useEffect(() => {
     document.title = "Login";
   });
@@ -48,14 +47,13 @@ function Login() {
 
       const token = response?.data?.token;
       //console.log(access_token)
-      setToken(token)
       console.log(response.data.token)
       // setCookie("token", token);
       // setCookie("super-admin", superadmin);
       setAuth({ email, password, superadmin, token });
       localStorage.setItem("token", "true");
       localStorage.setItem("username", Username);
-
+      navigate(from, { replace: true });
       toast.success("Login successful!");
 
     } catch (error) {
@@ -71,8 +69,6 @@ function Login() {
     setLoading(false);
   };
 
-  if(Token) {return <Layout/>}
-  else {
     return (
     <div className="page-background">
       <div id="login-wrap">
@@ -127,6 +123,6 @@ function Login() {
     </div>
   );
 }
-} 
+
 
 export default Login;
