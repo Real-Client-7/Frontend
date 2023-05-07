@@ -8,8 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import img from "../login/loginimg.png"
 import { useCookies } from "react-cookie";
-import { Url } from "../../components/layout";
+import Layout, { Url } from "../../components/layout";
 import { useContext } from 'react';
+import Dashborard from "../Dashboard/dashboard"
 
 
 
@@ -22,7 +23,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/dashboard";
-
+  const [Token,setToken] = useState()
 
 
   useEffect(() => {
@@ -53,7 +54,7 @@ function Login() {
 
       const token = response?.data?.token;
       //console.log(access_token)
-
+      setToken(token)
       console.log(response.data.token)
       // setCookie("token", token);
       // setCookie("super-admin", superadmin);
@@ -63,7 +64,6 @@ function Login() {
 
       toast.success("Login successful!");
 
-     navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       if (!error.response) {
@@ -77,8 +77,9 @@ function Login() {
     setLoading(false);
   };
 
-
-  return (
+  if(Token) {return <Layout/>}
+  else {
+    return (
     <div className="page-background">
       <div id="login-wrap">
         <img src={img} alt="Image" className="imglogin" />
@@ -132,5 +133,6 @@ function Login() {
     </div>
   );
 }
+} 
 
 export default Login;
