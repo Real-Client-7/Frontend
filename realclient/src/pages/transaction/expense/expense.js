@@ -91,6 +91,16 @@ function Expense() {
     {
       name: "date",
       label: "Date",
+      options: {
+        customBodyRender: (value) => {
+          const date = new Date(value);
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1;
+          const day = date.getDate();
+          const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${day < 10 ? "0" : ""}${day}`;
+          return formattedDate;
+        },
+      },
     },
     {
       name: "actions",
@@ -106,6 +116,7 @@ function Expense() {
                 <Button
                   sx={{ height: "40px" }}
                   onClick={() => {
+                    toast.info('Loading...')
                     axios
                     .get(`${URL}/expense/${tableMeta.rowData[0]}`)
                     .then((response) => {
@@ -246,31 +257,27 @@ console.log(DataById)
               variant="outlined" 
               onClick={() => {
                               if (DataPost.description === "" || DataPost.amount=== "" || DataPost.date === ""){
-                                Swal.fire({
-                                  title: 'field is Empty !',
-                                  icon: 'warning',
-                                  confirmButtonColor: '#447695', 
-                                })
+                                toast.warning("All the fields are required!")
+
                               }else {
                                 axios
                                 .post(`${URL}/expense/`, DataPost)
                                     .then((res) => {
                                       console.log(res);
+                                      show();
+                                      showAdd();
+                                      showicon();
                                       getData();
+                                      toast.success("Expense added successfully!")
                                     })
                                     .catch((err) => {
                                       console.log(err.message);
                                     });
-                                Swal.fire({
-                                  title:'Expense created',
-                                  icon :"success",
-                                  iconColor : "#d0e9e7",
-                                  confirmButtonColor: '#447695',
-                                })
+                            
                               }
                             }}
             >
-              Submit
+                 Create
             </Button>
           </form>
         )}
@@ -301,8 +308,12 @@ console.log(DataById)
             <TextField type="number" name="amount" defaultValue={DataById.amount} onChange={handelChangeEdit} />
             <label htmlFor="date"> Date</label>
             <TextField type="date" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
-            <Button variant="outlined" onClick={EditData}>
-              Edit Expense
+            <Button variant="outlined"
+  onClick={()=>{EditData();
+    show();
+    showEdit();
+    showiconAdd();
+    SetEditData(null)}}>              Edit Expense
             </Button>
           </form>
         )}
@@ -317,6 +328,7 @@ console.log(DataById)
               iconAdd && (
                 <Button
                   onClick={() => {
+                    toast.info('Loading...')
                     show();
                     showAdd();
                     showicon();
@@ -327,7 +339,7 @@ console.log(DataById)
               )
             }
           />
-                  <ToastContainer />
+        <ToastContainer />
 
         </div>
       </div>

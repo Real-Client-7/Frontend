@@ -166,6 +166,7 @@ function Appointment() {
                                 <Button
                                     sx={{ height: "40px" }}
                                     onClick={() => {
+                                        toast.info('Loading...')
                                         axios
                                             .get(`${URL}/appointment/getAppoitment/${tableMeta.rowData[0]}`)
                                             .then((response) => {
@@ -187,31 +188,30 @@ function Appointment() {
                             <Button
                                 sx={{ height: "40px" }}
                                 onClick={() => {
-                                    Swal.fire({
-                                        title: 'Are you sure?',
-                                        text: "You won't be able to revert this!",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#447695',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Yes, delete it!'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            axios
-                                                .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
-                                                .then((response) => {
-                                                    console.log(response.data.message);
-                                                    toast.success("Deleted successful")
-                                                    getData();
-
-                                                })
-                                                .catch((err) => {
-                                                    toast.error(`${err.message}`)
-                                                    console.log(err.message);
-                                                });
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "You won't be able to revert this!",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#447695',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Yes, delete it!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                    axios
+                                                        .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
+                                                        .then((response) => {
+                                                            console.log(response.data.message);
+                                                            toast.success("Appointment deleted successfully")
+                                                            getData();
+                                                            
+                                                        })
+                                                        .catch((err) => {
+                                                            toast.error(`${err.message}`)
+                                                            console.log(err.message);
+                                                        });
+                                            }
                                         }
-                                    })
-                                }
                                 }
                             >
                                 <MdDelete />
@@ -373,31 +373,29 @@ function Appointment() {
                         <Button
                             variant="outlined"
                             onClick={() => {
-                                if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === "" || DataPost.treatments === "") {
+                                            if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
 
+                                                toast.warning("All the fields are required!")
 
-                                    Swal.fire({
-                                        title: 'field is Empty !',
-                                        icon: 'warning',
-                                        confirmButtonColor: '#447695',
-                                    })
-                                } else {
-                                    axios
-                                        .post(`${URL}/appointment/addAppoitment`, DataPost)
-                                        .then((res) => {
-                                            SetPostData(restDataPost)
-                                            toast.success("Created successful")
-                                            getData();
-                                        })
-                                        .catch((err) => {
-                                            console.log(err.message);
-                                            toast.success(`${err.message}`)
-                                        });
-                                }
-                            }
-                            }
+                                            } else {
+                                                axios
+                                                .post(`${URL}/appointment/addAppoitment`, DataPost)
+                                                .then((res) => {
+                                                    SetPostData(restDataPost)
+                                                    toast.success("Appointment added successfully!")
+                                                    getData();
+                                                    show();
+                                                    showAdd();
+                                                    showicon();
+                                                })
+                                                .catch((err) => {
+                                                    console.log(err.message); 
+                                                    toast.success(`${err.message}`)  
+                                                });
+                                            }}
+                                        }
                         >
-                            Submit
+                            Create
                         </Button>
                     </form>
                 )}
@@ -468,7 +466,12 @@ function Appointment() {
                         </div>
                         <label htmlFor="date"> Date</label>
                         <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
-                        <Button variant="outlined" onClick={EditData}>
+                        <Button variant="outlined" 
+                      onClick={()=>{EditData();
+                        show();
+                        showEdit();
+                        showiconAdd();
+                        SetEditData(null)}}>
                             Edit Appoitment
                         </Button>
                     </form>
@@ -484,6 +487,7 @@ function Appointment() {
                             iconAdd && (
                                 <Button
                                     onClick={() => {
+                                        toast.info('Loading...')
                                         show();
                                         showAdd();
                                         showicon();
