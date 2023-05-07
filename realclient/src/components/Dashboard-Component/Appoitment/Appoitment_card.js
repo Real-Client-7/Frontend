@@ -2,7 +2,6 @@ import "../Appoitment/AppoitmentCard.css"
 import axios from "axios";
 import { useState, useEffect , useContext } from "react";
 import { Url } from "../../layout";
-import Loader from "../../loader/loader";
 
 function AppointmentCard() {
 const URL =useContext(Url)
@@ -26,7 +25,7 @@ console.log(Data)
 
 useEffect(()=>{
     getData()
-},[])
+})
 
 return ( 
     <>

@@ -9,7 +9,7 @@ function Chart() {
     const [DataExpense , SetDataExpense] = useState ([])
 
 
-    const date = new Date 
+    const date = new Date()
     let year = date.getFullYear()
     let DataincomeFilter = DataIncome.filter((ele)=> ele.updatedAt.includes(year))
     let sumOfincome = DataincomeFilter.reduce((acc, ele) => acc + ele.amount, 0);
@@ -44,7 +44,7 @@ function Chart() {
     useEffect(() => {
         getDataIncome();
         getDataExpense()
-    }, []);
+    });
 
   
     return (

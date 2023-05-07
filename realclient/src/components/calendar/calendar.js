@@ -39,7 +39,7 @@ const Calendars = (props) => {
         setEvents(transformedEvents);
       })
       .catch(error => console.error(error));
-  }, []);
+  });
   const minTime = new Date();
   minTime.setHours(7, 0, 0);
 
@@ -48,7 +48,7 @@ const Calendars = (props) => {
   return (
     <div className='all_calendar'>
       <div className="calendar" style={{    backgroundColor: 'white', padding: '20px', borderRadius: '10px', boxShadow: '0 0 10px gray' }}>
-      <h1 style={{ color: 'black', marginBottom: '15px' ,textAlign:'center' , marginTop:'-5px' ,color:'#447695'}}>Appointments</h1>
+      <h1 style={{  marginBottom: '15px' ,textAlign:'center' , marginTop:'-5px' ,color:'#447695'}}>Appointments</h1>
 
         <Calendar
         className='calendar_content'

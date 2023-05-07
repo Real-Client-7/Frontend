@@ -6,8 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import img from "../login/loginimg.png"
-import { useCookies } from "react-cookie";
-import Layout, { Url } from "../../components/layout";
+
+import Layout from "../../components/layout";
 
 
 
@@ -76,7 +76,7 @@ function Login() {
     return (
     <div className="page-background">
       <div id="login-wrap">
-        <img src={img} alt="Image" className="imglogin" />
+        <img src={img} alt="login" className="imglogin" />
 
         <div className="login-card">
           <div className="login-card-header">

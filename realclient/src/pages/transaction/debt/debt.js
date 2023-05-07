@@ -2,22 +2,16 @@
     import "../incom/incom.css";
     import { useEffect, useState,useContext } from "react";
     import axios from "axios";
-    import { TextField, Button,Select,MenuItem } from "@mui/material";
-    import { AiFillEdit } from "react-icons/ai";
-    import { MdDelete } from "react-icons/md";
+
     import Loader from "../../../components/loader/loder";
-    import Swal from "sweetalert2"
+
     import { Url } from "../../../components/layout";
 
 
     function Debt() {
     const URL =useContext(Url)
     const [Data, setData] = useState(null);
-    const [DataById, setDataById] = useState({
-        patient: "",
-        rest: "",
-    
-    });
+
 
 
     const getData = () => {
@@ -34,23 +28,14 @@
         // console.log(Data)
         useEffect(()=>{
         getData()
-        },[])
+        })
     
     
     
 
-    const [visibleAdd, isShowAdd] = useState(false);
-    const [visibleEdit, isShowEdit] = useState(false);
-    const [iconEdit, isShowIcon] = useState(true);
-    const [iconAdd, isShowIconAdd] = useState(true);
 
-    const showAdd = () => {
-        if (visibleAdd === false) {
-        isShowAdd(true);
-        } else {
-        isShowAdd(false);
-        }
-    };
+
+
 
 
 

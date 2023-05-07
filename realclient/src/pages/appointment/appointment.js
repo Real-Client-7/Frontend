@@ -262,7 +262,7 @@ function Appointment() {
         getData();
         getDataPatient()
         getDataTreatments()
-    }, []);
+    });
 
     const handelChangePost = (e) => {
         const value = e.target.value;
