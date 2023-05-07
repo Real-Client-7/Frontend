@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Income() {
   const URL =useContext(Url)
-  const [Data, setData] = useState(null);
+  const [Data, setData] = useState();
   const[DataPatient ,setDataPatient] = useState(null)
   const [DataById, setDataById] = useState({
     Name: "",
@@ -154,17 +154,6 @@ console.log(DataById)
   };
 
 
-  const EditData = () => {
-    axios
-      .put(`${URL}/expense/${Id}`, DataEdit)
-      .then((res) => {
-        console.log(res);
-        getData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   if (!Data) return <Loader />;
   return (

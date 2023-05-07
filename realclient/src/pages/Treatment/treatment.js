@@ -242,11 +242,17 @@ function Treatment() {
                     .then((res) => {
                       console.log(res);
                       getData();
+
+                      Swal.fire({
+                        title: "Treatment created",
+                        icon: "success",
+                        iconColor: "#d0e9e7",
+                        confirmButtonColor: "#447695",
+                      })
                                       show();
                                       showAdd();
                                       showicon();
                       toast.success("Treatment added successfully!")
-
                     })
                     .catch((err) => {
                       console.log(err.message);

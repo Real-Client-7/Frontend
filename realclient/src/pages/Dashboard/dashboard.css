@@ -19,12 +19,20 @@
     .first-lineDashboard{
         display: flex;
         flex-direction: column;
-        gap: 10px;
         height: 50%;
         width: 100%;
+        gap: 10px;
     }
     .Dashboard{
         align-items: center;
     }
-  
+    .seconde-line{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 12px;
+        height: 100vh;
+        gap: 20px;
+    }
 }

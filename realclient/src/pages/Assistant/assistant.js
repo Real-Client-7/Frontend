@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2";
 import { Url } from "../../components/layout";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,7 +27,12 @@ function Assistant() {
     password: "",
     isSuperAdmin: "",
   });
-  const [DataEdit, SetEditData] = useState(null);
+  const [DataEdit, SetEditData] = useState({
+    email: "",
+    username: "",
+    password: "",
+    isSuperAdmin: "",
+  });
   const [Id, setId] = useState();
 
   const show = () => {
@@ -60,7 +66,7 @@ function Assistant() {
   const showiconAdd = () => {
     iconAdd ? isShowIconAdd(false) : isShowIconAdd(true);
   };
-
+  console.log(DataEdit)
   const options = {
     filterType: "checkbox",
     responsive: "simple",
@@ -96,9 +102,7 @@ function Assistant() {
     },
     {
       name: "isSuperAdmin",
-      label: "Role",
-
-      label: "isSuperAdmin",
+      label: "role",
       options: { 
         customBodyRender:(value)=>{
           if (value === true){
@@ -157,6 +161,7 @@ function Assistant() {
                       axios
                         .delete(`${URL}/admin/${tableMeta.rowData[0]}`)
                         .then((response) => {
+
                           console.log(response);
                           toast.success("Patient deleted successfully")
                           getData();
@@ -176,19 +181,17 @@ function Assistant() {
       },
     },
   ];
-  console.log(Id);
+  
   const getData = () => {
     axios
       .get(`${URL}/admin/`)
       .then((response) => {
-        console.log(response);
         setData(response.data.response);
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-  console.log(DataById);
   useEffect(() => {
     getData();
   }, []);
@@ -205,8 +208,10 @@ function Assistant() {
     axios
       .put(`${URL}/admin/${Id}`, DataEdit)
       .then((res) => {
+
         console.log(res);
         toast.success("Admin updated successfully!")
+
         getData();
       })
       .catch((err) => {
