@@ -233,7 +233,7 @@ function Patient() {
 console.log(Id)
   const getData = () => {
     axios
-      .get(`http://localhost:8001/patient/getAllPatients`)
+      .get(`${URL}/patient/getAllPatients`)
       .then((response) => {
         console.log(response)
         setData(response.data);
