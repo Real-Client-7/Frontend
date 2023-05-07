@@ -6,14 +6,12 @@ import Transaction from "../src/pages/transaction/transaction"
 import Login from "../src/pages/login/logins"
 import Patient from "../src/pages/patients/patient"
 import Treatment from './pages/Treatment/treatment'
-import Layout from "../src/components/layout"
 import RequireAuth from './components/RequireAuth'
 function App() {
   return (
     <Routes>
       {/* public routes */}
       <Route path="Login" element={<Login />} />
-
       {/* protect routes */}
       <Route  path="/" element={<RequireAuth />}>
           <Route path="Appointment" element={<Appointment />} />
