@@ -41,8 +41,8 @@ const links = [
         id: 4,
     },
     {
-        path: "/assistant",
-        name: "Assistants",
+        path: "/admins",
+        name: "Admins",
         icon: <MdPeopleAlt />,
         id: 5,
     },
@@ -127,6 +127,7 @@ function SideBar(props) {
     const [width ,setwidth] = useState(true)
 
     let IsSuper = localStorage.getItem("super-admin")
+    let Username = localStorage.getItem("username")
 
     function sideCollaps(){
         let element = document.querySelector(".Side_bar")
@@ -165,7 +166,7 @@ function SideBar(props) {
                     <div className="image_containt">
                         <img src={IsSuper === "true" ? image:Assitant} alt="Dc-Bassem" />
                     </div>
-                    <h2>{IsSuper==="true"?"Dr. Bassem El-Monla":"Assistant"}</h2>
+                    <h2>{IsSuper==="true"?`Dr. ${Username}`:`Assistant ${Username}`}</h2>
                 </div>}
             </div>
             <div className="side_links">

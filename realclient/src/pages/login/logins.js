@@ -21,10 +21,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const URL =useContext(Url)
-
-   const from = location.state?.from?.pathname || "/dashboard";
+  const from = location.state?.from?.pathname || "/dashboard";
 
 
 
@@ -40,7 +37,7 @@ function Login() {
 
     try {
 
-      const response = await axios.post('http://localhost:4600/admin/login', {
+      const response = await axios.post(`https://bassam-monla-ycid.onrender.com/admin/login`, {
 
         email,
         password,
@@ -48,6 +45,7 @@ function Login() {
         withCredentials: true,
       });
       const superadmin = response.data.admin.isSuperAdmin;
+      const Username = response.data.admin.username
     //   console.log(superadmin)
     //  console.log(response )
 
@@ -59,6 +57,7 @@ function Login() {
       // setCookie("super-admin", superadmin);
       setAuth({ email, password, superadmin, token });
       localStorage.setItem("token", "true");
+      localStorage.setItem("username", Username);
 
       toast.success("Login successful!");
 

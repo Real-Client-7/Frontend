@@ -24,7 +24,12 @@ function Assistant() {
     password: "",
     isSuperAdmin: "",
   });
-  const [DataEdit, SetEditData] = useState(null);
+  const [DataEdit, SetEditData] = useState({
+    email: "",
+    username: "",
+    password: "",
+    isSuperAdmin: "",
+  });
   const [Id, setId] = useState();
 
   const show = () => {
@@ -58,7 +63,7 @@ function Assistant() {
   const showiconAdd = () => {
     iconAdd ? isShowIconAdd(false) : isShowIconAdd(true);
   };
-
+  console.log(DataEdit)
   const options = {
     filterType: "checkbox",
     responsive: "simple",
@@ -94,9 +99,7 @@ function Assistant() {
     },
     {
       name: "isSuperAdmin",
-      label: "Role",
-
-      label: "isSuperAdmin",
+      label: "role",
       options: { 
         customBodyRender:(value)=>{
           if (value === true){
@@ -154,7 +157,6 @@ function Assistant() {
                       axios
                         .delete(`${URL}/admin/${tableMeta.rowData[0]}`)
                         .then((response) => {
-                          console.log(response);
                           getData();
                         })
                         .catch((err) => {
@@ -172,19 +174,17 @@ function Assistant() {
       },
     },
   ];
-  console.log(Id);
+  
   const getData = () => {
     axios
       .get(`${URL}/admin/`)
       .then((response) => {
-        console.log(response);
         setData(response.data.response);
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-  console.log(DataById);
   useEffect(() => {
     getData();
   }, []);
@@ -201,9 +201,8 @@ function Assistant() {
     axios
       .put(`${URL}/admin/${Id}`, DataEdit)
       .then((res) => {
-        console.log(res);
+        console.log(res)
         getData();
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
