@@ -10,6 +10,7 @@ import RequireAuth from './components/RequireAuth'
 function App() {
   return (
     <Routes>
+      
       {/* public routes */}
       <Route path="Login" element={<Login />} />
       {/* protect routes */}
