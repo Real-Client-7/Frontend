@@ -1,1 +1,8 @@
-/* kljhgvbj */
+.Bill{
+    display: flex;
+    gap: 10px;
+}
+.Bill div{
+    display: flex;
+    flex-direction: column;
+}

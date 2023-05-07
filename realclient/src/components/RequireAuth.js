@@ -1,16 +1,19 @@
-import { useLocation ,Navigate,Outlet  } from "react-router-dom"; 
+import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Layout from "./layout";
 
-const RequireAuth=()=>{
-    const {auth}=useAuth();
-    const location =useLocation();
+const RequireAuth = () => {
+    const { auth } = useAuth();
+    const location = useLocation();
 
-    return(
+    return (
         auth?.token
-            ?<Outlet /> 
-           : <Navigate to="/login" state={{ from: location }} replace />
+            ? <Layout>
+                <Outlet />
+            </Layout>
+            : <Navigate to="/login" state={{ from: location }} replace />
 
-  );
+    );
 };
 
 export default RequireAuth;
