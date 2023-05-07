@@ -2,15 +2,12 @@ import React, {useState ,useEffect } from 'react';
 import "./login.css";
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import img from "../login/loginimg.png"
 import { useCookies } from "react-cookie";
 import Layout, { Url } from "../../components/layout";
-import { useContext } from 'react';
-import Dashborard from "../Dashboard/dashboard"
 
 
 
@@ -20,8 +17,6 @@ function Login() {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/dashboard";
   const [Token,setToken] = useState()
 
 
