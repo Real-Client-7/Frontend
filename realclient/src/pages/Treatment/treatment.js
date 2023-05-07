@@ -242,17 +242,11 @@ function Treatment() {
                     .then((res) => {
                       console.log(res);
                       getData();
-
-                      Swal.fire({
-                        title: "Treatment created",
-                        icon: "success",
-                        iconColor: "#d0e9e7",
-                        confirmButtonColor: "#447695",
-                      })
                                       show();
                                       showAdd();
                                       showicon();
                       toast.success("Treatment added successfully!")
+                      SetPostData({type : ""})
                     })
                     .catch((err) => {
                       console.log(err.message);
@@ -290,10 +284,10 @@ function Treatment() {
       
 
             <Button variant="outlined" onClick={()=>{EditData();
-             show();
-             showEdit();
-             showiconAdd();
-             SetEditData(null)}}>
+            show();
+            showEdit();
+            showiconAdd();
+            SetEditData(null)}}>
               Edit Treatment
             </Button>
           </form>

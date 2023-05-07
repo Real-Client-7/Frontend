@@ -30,7 +30,7 @@ return (
     <span> {!Data?<Loader/> : Data.length} </span>
     </div>
     <div>
-    <h2>Total surgeries</h2>
+    <h2>Total Surgeries</h2>
     <p></p>
     </div>
   </div>

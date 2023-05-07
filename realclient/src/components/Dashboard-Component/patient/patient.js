@@ -35,7 +35,7 @@ function PatienBox() {
       {Data && <button onClick={Toggel}><ImEye/></button>}
       </div>
       <div>
-      <h2>Total patient</h2>
+      <h2>Total Patient</h2>
       <p></p>
       </div>
     </div>
