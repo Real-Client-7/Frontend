@@ -22,6 +22,7 @@ function App() {
           <Route path="Transaction" element={<Transaction />} />
       </Route>
     </Routes>
+    
   )
 }
 export default App;
