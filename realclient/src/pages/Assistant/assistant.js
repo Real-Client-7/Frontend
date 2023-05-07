@@ -8,6 +8,8 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2";
 import { Url } from "../../components/layout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Assistant() {
   const URL = useContext(Url);
@@ -121,6 +123,7 @@ function Assistant() {
                 <Button
                   sx={{ height: "40px" }}
                   onClick={() => {
+                    toast.info('Loading...')
                     axios
                       .get(`${URL}/admin/${tableMeta.rowData[0]}`)
                       .then((response) => {
@@ -155,6 +158,7 @@ function Assistant() {
                         .delete(`${URL}/admin/${tableMeta.rowData[0]}`)
                         .then((response) => {
                           console.log(response);
+                          toast.success("Patient deleted successfully")
                           getData();
                         })
                         .catch((err) => {
@@ -202,8 +206,8 @@ function Assistant() {
       .put(`${URL}/admin/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
+        toast.success("Admin updated successfully!")
         getData();
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -222,7 +226,7 @@ function Assistant() {
   return (
     <div className="incomss">
       <div className="none">
-        {/* for add expense */}
+        {/* for add admin */}
         {visibleAdd && (
           <form>
             <div className="head-form">
@@ -275,36 +279,30 @@ function Assistant() {
                   DataPost.username === "" ||
                   DataPost.password === "" ||
                   DataPost.isSuperAdmin === "" 
-                ) {
-                  Swal.fire({
-                    title: "field is Empty !",
-                    icon: "warning",
-                    confirmButtonColor: "#447695",
-                  });
-                } else {
+                )  toast.warning("All the fields are required!")
+                else {
                   axios
                     .post(`${URL}/admin/add`, DataPost)
                     .then((res) => {
                       console.log(res);
                       getData();
+                      show();
+                      showAdd();
+                      showicon();
+                      toast.success("Admin added successfully!")
                     })
                     .catch((err) => {
                       console.log(err.message);
                     });
-                  Swal.fire({
-                    title: "Admin created",
-                    icon: "success",
-                    iconColor: "#d0e9e7",
-                    confirmButtonColor: "#447695",
-                  });
+            
                 }
               }}
             >
-              Submit
+              Create
             </Button>
           </form>
         )}
-        {/* for edit expense */}
+        {/* for edit admin */}
         {visibleEdit && (
           <form>
             <div className="head-form">
@@ -351,7 +349,11 @@ function Assistant() {
               <MenuItem value={true} > Admin </MenuItem>
               <MenuItem value={false} > Assistant </MenuItem>
             </Select>
-            <Button variant="outlined" onClick={EditData}>
+            <Button variant="outlined"  onClick={()=>{EditData();
+             show();
+             showEdit();
+             showiconAdd();
+             SetEditData(null)}}>
               Edit Admin
             </Button>
           </form>
@@ -377,6 +379,7 @@ function Assistant() {
               )
             }
           />
+                  <ToastContainer/>
         </div>
       </div>
     </div>

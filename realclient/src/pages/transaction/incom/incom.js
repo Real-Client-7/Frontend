@@ -8,6 +8,8 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../../components/loader/loder";
 import Swal from "sweetalert2"
 import { Url } from "../../../components/layout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Income() {
@@ -204,31 +206,26 @@ console.log(DataById)
               variant="outlined" 
               onClick={() => {
                               if (DataPost.patient === "" || DataPost.amount=== ""){
-                                Swal.fire({
-                                  title: 'field is Empty !',
-                                  icon: 'warning',
-                                  confirmButtonColor: '#447695', 
-                                })
+                                toast.warning("All the fields are required!")
+
                               }else {
                                 axios
                                 .post(`${URL}/income/addIncome`, DataPost)
                                     .then((res) => {
                                       console.log(res);
                                       getData();
+                                      show();
+                                      showAdd();
+                                      showicon();
+                                      toast.success("Income added successfully!")
                                     })
                                     .catch((err) => {
                                       console.log(err.message);
                                     });
-                                Swal.fire({
-                                  title:'Income created',
-                                  icon :"success",
-                                  iconColor : "#d0e9e7",
-                                  confirmButtonColor: '#447695',
-                                })
                               }
                             }}
             >
-              Submit
+              Create
             </Button>
           </form>
         )}
@@ -254,6 +251,8 @@ console.log(DataById)
               )
             }
           />
+                    <ToastContainer/>
+
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ function Login() {
 
     try {
 
-      const response = await axios.post('http://localhost:4600/admin/login', {
+      const response = await axios.post('http://localhost:8001/admin/login', {
 
         email,
         password,
@@ -66,7 +66,7 @@ function Login() {
     } catch (error) {
       console.error(error);
       if (!error.response) {
-        toast.error("No Internet Connection!");
+        toast.error(error.response);
       } else {
         console.error(error);
         toast.error("Email/Password invalid!");

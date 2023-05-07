@@ -177,6 +177,7 @@ function Patient() {
                 <Button
                   sx={{ height: "40px" }}
                   onClick={() => {
+                    toast.info('Loading...')
                     axios
                     .get(`${URL}/patient/get/${tableMeta.rowData[0]}`)
                     .then((response) => {
@@ -211,7 +212,7 @@ function Patient() {
                       .delete(`${URL}/patient/deletePatient/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         console.log(response.data);
-                        toast.success("Deleted Patient successful")
+                        toast.success("Patient deleted successfully")
                         getData();
                       })
                       .catch((err) => {
@@ -232,7 +233,7 @@ function Patient() {
 console.log(Id)
   const getData = () => {
     axios
-      .get(`${URL}/patient/getAllPatients`)
+      .get(`http://localhost:8001/patient/getAllPatients`)
       .then((response) => {
         console.log(response)
         setData(response.data);
@@ -260,7 +261,7 @@ console.log(DataById)
       .put(`${URL}/patient/editPatient/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
-        toast.success("Updated patient sucss")
+        toast.success("Patient updated successfully!")
         getData();
       })
       .catch((err) => {
@@ -282,7 +283,7 @@ console.log(DataById)
   return (
     <div className="incomss">
       <div className="none">
-        {/* for add expense */}
+        {/* for add patient */}
         {visibleAdd && (
           <form>
             <div className="head-form">
@@ -360,7 +361,7 @@ console.log(DataById)
               onChange={handelChangePost}
             >
               <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
             </Select>
             </div>
             <div className="input-lable">
@@ -370,7 +371,7 @@ console.log(DataById)
               name="maritalStatus"
               onChange={handelChangePost}
             >
-              <MenuItem value="Singel">Single</MenuItem>
+              <MenuItem value="Single">Single</MenuItem>
               <MenuItem value="Married">Maried</MenuItem>
               <MenuItem value="Engaged">Engaged</MenuItem>
             </Select>
@@ -426,17 +427,20 @@ console.log(DataById)
               variant="outlined" 
               onClick={() => {
                               if (DataPost.first_name === "" || DataPost.last_name=== "" || DataPost.email === "" ||DataPost.mobile === "" ||DataPost.address === ""||DataPost.maritalStatus === ""||DataPost.dob === ""||DataPost.gender === "" || DataPost.address === ""){
-                                Swal.fire({
-                                  title: 'field is Empty !',
-                                  icon: 'warning',
-                                  confirmButtonColor: '#447695', 
-                                })
+                                toast.warning("All the fields are required!")
+
                               }else {
                                 axios
                                 .post(`${URL}/patient/addPatient`, DataPost)
                                     .then((res) => {
                                       console.log(res);
                                       getData();
+                                      show();
+                                      showAdd();
+                                      showicon();
+                                      toast.success("Patient added successfully!")
+
+
                                     })
                                     .catch((err) => {
                                       console.log(err.message);
@@ -445,11 +449,11 @@ console.log(DataById)
                               }
                             }}
             >
-              Submit
+              Create
             </Button>
           </form>
         )}
-        {/* for edit expense */}
+        {/* for edit patient */}
         {visibleEdit && (
           <form>
             <div className="head-form">
@@ -526,7 +530,7 @@ console.log(DataById)
               onChange={handelChangeEdit}
             >
               <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
             </Select>
             </div>
             <div className="input-lable">
@@ -537,7 +541,7 @@ console.log(DataById)
               defaultValue={DataById.maritalStatus}
               onChange={handelChangeEdit}
             >
-              <MenuItem value="Singel">Single</MenuItem>
+              <MenuItem value="Single">Single</MenuItem>
               <MenuItem value="Married">Maried</MenuItem>
               <MenuItem value="Engaged">Engaged</MenuItem>
             </Select>
@@ -590,7 +594,12 @@ console.log(DataById)
             </div>
 
 
-            <Button variant="outlined" onClick={EditData}>
+            <Button variant="outlined" 
+            onClick={()=>{EditData();
+             show();
+             showEdit();
+             showiconAdd();
+             SetEditData(null)}}>
               Edit Patient
             </Button>
           </form>
@@ -606,6 +615,7 @@ console.log(DataById)
               iconAdd && (
                 <Button
                   onClick={() => {
+                    toast.info('Loading...')
                     show();
                     showAdd();
                     showicon();

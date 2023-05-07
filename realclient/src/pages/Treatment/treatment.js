@@ -8,18 +8,19 @@ import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
 import Swal from "sweetalert2";
 import { Url } from "../../components/layout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Treatment() {
   const URL = useContext(Url);
   const [Data, setData] = useState(null);
   const [DataById, setDataById] = useState({
     type: "",
-    nbr_of_tooth: "",
     appointment: "",
   });
   const [DataPost, SetPostData] = useState({
     type: "",
-    nbr_of_tooth: "",
+
   });
   const [DataEdit, SetEditData] = useState(null);
   const [Id, setId] = useState();
@@ -82,10 +83,7 @@ function Treatment() {
       label: "Type",
     },
   
-    // {
-    //   name: "appointment",
-    //   label: "Appointment",
-    // },
+ 
     {
       name: "actions",
       label: "Actions",
@@ -100,6 +98,8 @@ function Treatment() {
                 <Button
                   sx={{ height: "40px" }}
                   onClick={() => {
+                    toast.info('Loading...')
+
                     axios
                       .get(`${URL}/treatments/${tableMeta.rowData[0]}`)
                       .then((response) => {
@@ -133,7 +133,8 @@ function Treatment() {
                       axios
                         .delete(`${URL}/treatments/${tableMeta.rowData[0]}`)
                         .then((response) => {
-                          console.log(response);
+                          toast.success("Treatment deleted successfully")
+
                           getData();
                         })
                         .catch((err) => {
@@ -181,6 +182,7 @@ function Treatment() {
       .put(`${URL}/treatments/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
+        toast.success("Patient updated successfully!")
         getData();
         console.log(res);
       })
@@ -223,24 +225,12 @@ function Treatment() {
               required="required"
               onChange={handelChangePost}
             />
-            <label htmlFor="nbr_of_tooth"> Nbr Of Tooth</label>
-            <TextField
-              type="text"
-              name="nbr_of_tooth"
-              onChange={handelChangePost}
-            />
-            {/* <label htmlFor="appointment"> Appointment</label>
-            <TextField
-              type="number"
-              required="required"
-              name="appointment"
-              onChange={handelChangePost}
-            /> */}
+         
 
             <Button
               variant="outlined"
               onClick={() => {
-                if (DataPost.type === "" || DataPost.nbr_of_tooth === "") {
+                if (DataPost.type === "") {
                   Swal.fire({
                     title: "field is Empty !",
                     icon: "warning",
@@ -252,12 +242,11 @@ function Treatment() {
                     .then((res) => {
                       console.log(res);
                       getData();
-                      Swal.fire({
-                        title: "Treatment created",
-                        icon: "success",
-                        iconColor: "#d0e9e7",
-                        confirmButtonColor: "#447695",
-                      });
+                                      show();
+                                      showAdd();
+                                      showicon();
+                      toast.success("Treatment added successfully!")
+
                     })
                     .catch((err) => {
                       console.log(err.message);
@@ -265,7 +254,7 @@ function Treatment() {
                 }
               }}
             >
-              Submit
+              Create
             </Button>
           </form>
         )}
@@ -279,7 +268,7 @@ function Treatment() {
                   show();
                   showEdit();
                   showiconAdd();
-                  SetEditData(null);
+                  SetEditData(null)
                 }}
               >
                 x
@@ -292,22 +281,13 @@ function Treatment() {
               onChange={handelChangeEdit}
               defaultValue={DataById.type}
             />
-            <label htmlFor="nbr_of_tooth"> Nbr Of Tooth</label>
-            <TextField
-              type="text"
-              name="nbr_of_tooth"
-              defaultValue={DataById.nbr_of_tooth}
-              onChange={handelChangeEdit}
-            />
-            {/* <label htmlFor="appointment"> Appointment</label>
-            <TextField
-              type="text"
-              name="appointment"
-              defaultValue={DataById.appointment}
-              onChange={handelChangeEdit}
-            /> */}
+      
 
-            <Button variant="outlined" onClick={EditData}>
+            <Button variant="outlined" onClick={()=>{EditData();
+             show();
+             showEdit();
+             showiconAdd();
+             SetEditData(null)}}>
               Edit Treatment
             </Button>
           </form>
@@ -323,6 +303,7 @@ function Treatment() {
               iconAdd && (
                 <Button
                   onClick={() => {
+                    toast.info('Loading...')
                     show();
                     showAdd();
                     showicon();
@@ -333,6 +314,8 @@ function Treatment() {
               )
             }
           />
+                    <ToastContainer/>
+
         </div>
       </div>
     </div>

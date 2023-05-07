@@ -163,6 +163,7 @@ function Appointment() {
                                 <Button
                                     sx={{ height: "40px" }}
                                     onClick={() => {
+                                        toast.info('Loading...')
                                         axios
                                         .get(`${URL}/appointment/getAppoitment/${tableMeta.rowData[0]}`)
                                         .then((response) => {
@@ -198,7 +199,7 @@ function Appointment() {
                                                         .delete(`${URL}/appointment/deleteApointment/${tableMeta.rowData[0]}`)
                                                         .then((response) => {
                                                             console.log(response.data.message);
-                                                            toast.success("Deleted successful")
+                                                            toast.success("Appointment deleted successfully")
                                                             getData();
                                                             
                                                         })
@@ -373,19 +374,18 @@ console.log(DataPatient)
                             onClick={() => {
                                             if (DataPost.patient === "" || DataPost.date === "" || DataPost.note === ""  || DataPost.treatments === "") {
 
+                                                toast.warning("All the fields are required!")
 
-                                                Swal.fire({
-                                                    title: 'field is Empty !',
-                                                    icon: 'warning',
-                                                    confirmButtonColor: '#447695',
-                                                })
                                             } else {
                                                 axios
                                                 .post(`${URL}/appointment/addAppoitment`, DataPost)
                                                 .then((res) => {
                                                     SetPostData(restDataPost)
-                                                    toast.success("Created successful")
+                                                    toast.success("Appointment added successfully!")
                                                     getData();
+                                                    show();
+                                                    showAdd();
+                                                    showicon();
                                                 })
                                                 .catch((err) => {
                                                     console.log(err.message); 
@@ -394,7 +394,7 @@ console.log(DataPatient)
                                             }}
                                         }
                         >
-                            Submit
+                            Create
                         </Button>
                     </form>
                 )}
@@ -466,7 +466,12 @@ console.log(DataPatient)
                         </div>
                         <label htmlFor="date"> Date</label>
                         <input type="datetime-local" name="date" defaultValue={DataById.date} onChange={handelChangeEdit} />
-                        <Button variant="outlined" onClick={EditData}>
+                        <Button variant="outlined" 
+                      onClick={()=>{EditData();
+                        show();
+                        showEdit();
+                        showiconAdd();
+                        SetEditData(null)}}>
                             Edit Appoitment
                         </Button>
                     </form>
@@ -482,6 +487,7 @@ console.log(DataPatient)
                             iconAdd && (
                                 <Button
                                     onClick={() => {
+                                        toast.info('Loading...')
                                         show();
                                         showAdd();
                                         showicon();
