@@ -1,0 +1,19 @@
+.form_patient {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 10px;
+}
+.input-lable{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+@media  (max-width: 768px) {
+    .form_patient {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .form-add-income{
+        width: 100%;
+    }
+}

@@ -2,7 +2,7 @@ import MUIDataTable from "mui-datatables";
 import "../../pages/transaction/incom/incom.css";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { TextField, Button ,Select ,MenuItem } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import Loader from "../../components/loader/loder";
@@ -11,20 +11,16 @@ import { Url } from "../../components/layout";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Assistant() {
+function Treatment() {
   const URL = useContext(Url);
   const [Data, setData] = useState(null);
   const [DataById, setDataById] = useState({
-    email: "",
-    username: "",
-    password: "",
-    isSuperAdmin: "",
+    type: "",
+    appointment: "",
   });
   const [DataPost, SetPostData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    isSuperAdmin: "",
+    type: "",
+
   });
   const [DataEdit, SetEditData] = useState(null);
   const [Id, setId] = useState();
@@ -83,32 +79,11 @@ function Assistant() {
       },
     },
     {
-      name: "email",
-      label: "Email",
+      name: "type",
+      label: "Type",
     },
-    {
-      name: "username",
-      label: "Username",
-    },
-    {
-      name: "password",
-      label: "Password",
-    },
-    {
-      name: "isSuperAdmin",
-      label: "Role",
-
-      label: "isSuperAdmin",
-      options: { 
-        customBodyRender:(value)=>{
-          if (value === true){
-            return "Admin"
-          }else{
-            return "Assistant"
-          }
-        }
-      }
-    },
+  
+ 
     {
       name: "actions",
       label: "Actions",
@@ -124,8 +99,9 @@ function Assistant() {
                   sx={{ height: "40px" }}
                   onClick={() => {
                     toast.info('Loading...')
+
                     axios
-                      .get(`${URL}/admin/${tableMeta.rowData[0]}`)
+                      .get(`${URL}/treatments/${tableMeta.rowData[0]}`)
                       .then((response) => {
                         setDataById(response.data.response);
                         setId(tableMeta.rowData[0]);
@@ -155,10 +131,10 @@ function Assistant() {
                   }).then((result) => {
                     if (result.isConfirmed) {
                       axios
-                        .delete(`${URL}/admin/${tableMeta.rowData[0]}`)
+                        .delete(`${URL}/treatments/${tableMeta.rowData[0]}`)
                         .then((response) => {
-                          console.log(response);
-                          toast.success("Patient deleted successfully")
+                          toast.success("Treatment deleted successfully")
+
                           getData();
                         })
                         .catch((err) => {
@@ -179,7 +155,7 @@ function Assistant() {
   console.log(Id);
   const getData = () => {
     axios
-      .get(`${URL}/admin/`)
+      .get(`${URL}/treatments/`)
       .then((response) => {
         console.log(response);
         setData(response.data.response);
@@ -203,11 +179,12 @@ function Assistant() {
 
   const EditData = () => {
     axios
-      .put(`${URL}/admin/${Id}`, DataEdit)
+      .put(`${URL}/treatments/${Id}`, DataEdit)
       .then((res) => {
         console.log(res);
-        toast.success("Admin updated successfully!")
+        toast.success("Patient updated successfully!")
         getData();
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -226,11 +203,11 @@ function Assistant() {
   return (
     <div className="incomss">
       <div className="none">
-        {/* for add admin */}
+        {/* for add expense */}
         {visibleAdd && (
           <form>
             <div className="head-form">
-              <h2>Add Admin</h2>
+              <h2>Add Treatment</h2>
               <button
                 onClick={() => {
                   show();
@@ -241,60 +218,39 @@ function Assistant() {
                 x
               </button>
             </div>
-            <label htmlFor="email"> Email</label>
+            <label htmlFor="type"> Type</label>
             <TextField
               type="text"
-              name="email"
+              name="type"
               required="required"
               onChange={handelChangePost}
             />
-            <label htmlFor="username"> Username</label>
-            <TextField
-              type="text"
-              name="username"
-              required="required"
-              onChange={handelChangePost}
-            />
-            <label htmlFor="password"> Password</label>
-            <TextField
-              type="text"
-              required="required"
-              name="password"
-              onChange={handelChangePost}
-            />
-            <label htmlFor="isSuperAdmin"> Role</label>
-            <Select
-              type="text"
-              name="isSuperAdmin"
-              onChange={handelChangePost}
-            >
-              <MenuItem value={true} > Admin </MenuItem>
-              <MenuItem value={false} > Assistant </MenuItem>
-            </Select>
+         
+
             <Button
               variant="outlined"
               onClick={() => {
-                if (
-                  DataPost.email === "" ||
-                  DataPost.username === "" ||
-                  DataPost.password === "" ||
-                  DataPost.isSuperAdmin === "" 
-                )  toast.warning("All the fields are required!")
-                else {
+                if (DataPost.type === "") {
+                  Swal.fire({
+                    title: "field is Empty !",
+                    icon: "warning",
+                    confirmButtonColor: "#447695",
+                  });
+                } else {
                   axios
-                    .post(`${URL}/admin/add`, DataPost)
+                    .post(`${URL}/treatments/addTreatment`, DataPost)
                     .then((res) => {
                       console.log(res);
                       getData();
-                      show();
-                      showAdd();
-                      showicon();
-                      toast.success("Admin added successfully!")
+                                      show();
+                                      showAdd();
+                                      showicon();
+                      toast.success("Treatment added successfully!")
+
                     })
                     .catch((err) => {
                       console.log(err.message);
                     });
-            
                 }
               }}
             >
@@ -302,59 +258,37 @@ function Assistant() {
             </Button>
           </form>
         )}
-        {/* for edit admin */}
+        {/* for edit expense */}
         {visibleEdit && (
           <form>
             <div className="head-form">
-              <h2>Edit Admin </h2>
+              <h2>Edit Treatment </h2>
               <button
                 onClick={() => {
                   show();
                   showEdit();
                   showiconAdd();
-                  SetEditData(null);
+                  SetEditData(null)
                 }}
               >
                 x
               </button>
             </div>
-            <label htmlFor="email"> Email</label>
+            <label htmlFor="type"> Type</label>
             <TextField
               type="text"
-              name="email"
+              name="type"
               onChange={handelChangeEdit}
-              defaultValue={DataById.email}
+              defaultValue={DataById.type}
             />
-            <label htmlFor="username"> Username</label>
-            <TextField
-              type="text"
-              name="username"
-              defaultValue={DataById.username}
-              onChange={handelChangeEdit}
-            />
-            <label htmlFor="password"> Password</label>
-            <TextField
-              type="text"
-              name="password"
-              defaultValue={DataById.password}
-              onChange={handelChangeEdit}
-            />
-            <label htmlFor="isSuperAdmin"> Role</label>
-            <Select
-              type="text"
-              name="isSuperAdmin"
-              defaultValue={DataById.isSuperAdmin}
-              onChange={handelChangeEdit}
-            >
-              <MenuItem value={true} > Admin </MenuItem>
-              <MenuItem value={false} > Assistant </MenuItem>
-            </Select>
-            <Button variant="outlined"  onClick={()=>{EditData();
+      
+
+            <Button variant="outlined" onClick={()=>{EditData();
              show();
              showEdit();
              showiconAdd();
              SetEditData(null)}}>
-              Edit Admin
+              Edit Treatment
             </Button>
           </form>
         )}
@@ -369,21 +303,23 @@ function Assistant() {
               iconAdd && (
                 <Button
                   onClick={() => {
+                    toast.info('Loading...')
                     show();
                     showAdd();
                     showicon();
                   }}
                 >
-                  + Add Admin
+                  + Add Treatment
                 </Button>
               )
             }
           />
-                  <ToastContainer/>
+                    <ToastContainer/>
+
         </div>
       </div>
     </div>
   );
 }
 
-export default Assistant;
+export default Treatment;

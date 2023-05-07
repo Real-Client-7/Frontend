@@ -1,1 +1,30 @@
-/* kjhggvhbjkl; */
+.Dashboard{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+.first-lineDashboard{
+    display: flex;
+    justify-content: space-around;
+
+}
+.seconde-line{
+    margin-left: 23px;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .first-lineDashboard{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 50%;
+        width: 100%;
+    }
+    .Dashboard{
+        align-items: center;
+    }
+  
+}

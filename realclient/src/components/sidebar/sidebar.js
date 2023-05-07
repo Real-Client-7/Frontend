@@ -8,11 +8,55 @@ import { AiOutlineTransaction } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
 import {BsFillArrowLeftCircleFill} from "react-icons/bs"
+import {TbDental} from "react-icons/tb"
 import image from "../image/dc-Bassam.jpeg"
+import Assitant from "../image/Assitant.jpeg"
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 const links = [
+    {
+        path: "/dashboard",
+        name: "Dashboard",
+        icon: <MdSpaceDashboard />,
+        id: 1,
+    },
+    {
+        path: "/patient",
+        name: "Patients",
+        icon: <MdGroups2 />,
+        id: 2,
+    },
+    {
+        path: "/treatment",
+        name: "Treatment",
+        icon: <TbDental />,
+        id: 3,
+    },
+    {
+        path: "/appointment",
+        name: "Appointments",
+        icon: <TbFileTime />,
+        id: 4,
+    },
+    {
+        path: "/assistant",
+        name: "Assistants",
+        icon: <MdPeopleAlt />,
+        id: 5,
+    },
+    {
+        path: "/transaction",
+        name: "Transactions",
+        icon: <AiOutlineTransaction />,
+        id: 6,
+    },
+];
+
+
+
+const linksAssitant = [
     {
         path: "/dashboard",
         name: "Dashboard",
@@ -32,9 +76,9 @@ const links = [
         id: 3,
     },
     {
-        path: "/assistant",
-        name: "Assistants",
-        icon: <MdPeopleAlt />,
+        path: "/treatment",
+        name: "Treatment",
+        icon: <TbDental/>,
         id: 4,
     },
     {
@@ -45,7 +89,31 @@ const links = [
     },
 ];
 
-function SideBar() {
+
+function handleLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("super-admin");
+  window.location.href = "/login";
+}
+
+setTimeout(function() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("super-admin");
+    window.location.href = "/login";
+
+  }, 8 * 60 * 60 * 1000);
+
+  //1 * 60  * 1000)
+
+function SideBar(props) {
+
+
+   
+
+    const iscollaps = ()=>{
+        props.isCollaps(!props.Collaps)
+    }
+
     let activeStyle = {
         backgroundColor: "#d0e9e7",
         color: "#447695",
@@ -56,6 +124,9 @@ function SideBar() {
     const [title , setTitle] = useState("")
     const [show , setShow] = useState(true)
     const [iconBtn ,seticoneBTn]=useState(<BsFillArrowLeftCircleFill/>)
+    const [width ,setwidth] = useState(true)
+
+    let IsSuper = localStorage.getItem("super-admin")
 
     function sideCollaps(){
         let element = document.querySelector(".Side_bar")
@@ -74,10 +145,15 @@ function SideBar() {
             seticoneBTn(<BsFillArrowLeftCircleFill/>)
         }
     }
-    
+   useEffect(()=>{if (window.innerWidth < 600) {
+    setwidth(false)
+  } else {
+  }},[])
+        
+      
     return (
         <div className="Side_bar">
-            <button onClick={()=>{sideCollaps();isVisible();}} className="arrow-btn">{iconBtn}</button>
+            <button onClick={()=>{sideCollaps();isVisible();iscollaps()}} className="arrow-btn">{iconBtn}</button>
             <div className="title-Side">
                 <div>
                     {title}
@@ -87,13 +163,13 @@ function SideBar() {
             {show &&<div className="Dc_info">
                     <h1>MEC</h1>
                     <div className="image_containt">
-                        <img src={image} alt="Dc-Bassem" />
+                        <img src={IsSuper === "true" ? image:Assitant} alt="Dc-Bassem" />
                     </div>
-                    <h2>Dr. Bassem El-Monla</h2>
+                    <h2>{IsSuper==="true"?"Dr. Bassem El-Monla":"Assistant"}</h2>
                 </div>}
             </div>
             <div className="side_links">
-                {links.map((ele) => {
+                {(IsSuper==="true" ? links:linksAssitant).map((ele) => {
                     return (
                         <NavLink
                         to={ele.path} className={"navlink"} key={ele.id}
@@ -101,15 +177,15 @@ function SideBar() {
                         onClick={()=>{setTitle(ele.name)}}
                         >
                             <div className="each_link">
-                                {ele.icon} {show&&<>{ele.name }</>}
+                                {width&&<>{ele.icon}</>} {show&&<>{ele.name }</>}
                             </div>
                         </NavLink>
                     );
                 })}
             </div>
             <div className="base_bar">
-                <button className="logout">
-                    <MdOutlineLogout />
+            <button className="logout" onClick={handleLogout}>
+                                    <MdOutlineLogout />
                     {show && <span>Logout</span>}
                 </button>
             </div>

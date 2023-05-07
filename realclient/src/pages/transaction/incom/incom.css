@@ -1,3 +1,4 @@
+
 .income_table{
     display: flex;
     height: 598px;
@@ -16,6 +17,7 @@
 }
 
 .incomss{
+    margin-top:10px ;
     display: flex;
     flex-direction: row-reverse;
 }
@@ -25,14 +27,12 @@
     justify-content: center;
     align-items: center;
     transition: all 1s;
-    margin-right: 20px;
 }
 
 .form-add-income form{
     width: 70%;
     padding: 20px;
     display: inline-flex;
-    margin-right: 30px;
     flex-direction: column;
     gap: 10px;
     background-color: var(--lightBlue);
@@ -51,4 +51,18 @@
     background-color: transparent;
     color: var(--darkBlue);
     font-size: 30px;
+}
+
+@media only screen and (max-width: 600px){
+    .incomss{
+        margin-top:10px ;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .income_table{
+        justify-content: start;
+        margin-top: 20px;
+        height: auto;
+    }
 }
