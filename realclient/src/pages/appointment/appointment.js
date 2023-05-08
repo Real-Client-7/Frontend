@@ -225,7 +225,7 @@ function Appointment() {
         },
     ];
     console.log(Id)
-    const getData = () => {
+    const getData = (e) => {
         axios
             .get(`${URL}/appointment/`)
             .then((response) => {
@@ -262,7 +262,7 @@ function Appointment() {
         getData();
         getDataPatient()
         getDataTreatments()
-    });
+    },[]);
 
     const handelChangePost = (e) => {
         const value = e.target.value;

@@ -39,7 +39,7 @@ const Calendars = (props) => {
         setEvents(transformedEvents);
       })
       .catch(error => console.error(error));
-  });
+  },[]);
   const minTime = new Date();
   minTime.setHours(7, 0, 0);
 

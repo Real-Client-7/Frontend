@@ -28,7 +28,7 @@
         // console.log(Data)
         useEffect(()=>{
         getData()
-        })
+        },[])
     
     
     

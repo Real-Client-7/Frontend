@@ -130,11 +130,11 @@ console.log(Data)
 useEffect(()=>{
   getData()
   getDataPatient()
-})
+},[])
 
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const handelChangePost = (e) => {
     const value = e.target.value;

@@ -21,7 +21,7 @@ function Login() {
   const from = location.state?.from?.pathname || "/dashboard";
   useEffect(() => {
     document.title = "Login";
-  });
+  },[]);
 
 
 

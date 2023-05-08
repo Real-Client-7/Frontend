@@ -23,6 +23,12 @@ const links = [
         id: 1,
     },
     {
+        path: "/admins",
+        name: "Admins",
+        icon: <MdPeopleAlt />,
+        id: 5,
+    },
+    {
         path: "/patient",
         name: "Patients",
         icon: <MdGroups2 />,
@@ -39,12 +45,6 @@ const links = [
         name: "Appointments",
         icon: <TbFileTime />,
         id: 4,
-    },
-    {
-        path: "/admins",
-        name: "Admins",
-        icon: <MdPeopleAlt />,
-        id: 5,
     },
     {
         path: "/transaction",

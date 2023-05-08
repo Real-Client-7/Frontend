@@ -44,7 +44,7 @@ function Chart() {
     useEffect(() => {
         getDataIncome();
         getDataExpense()
-    });
+    },[]);
 
   
     return (

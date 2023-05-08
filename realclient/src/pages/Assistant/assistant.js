@@ -194,7 +194,7 @@ function Assistant() {
   };
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const handelChangePost = (e) => {
     const value = e.target.value;
