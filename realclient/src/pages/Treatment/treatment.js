@@ -167,7 +167,7 @@ function Treatment() {
   console.log(DataById);
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const handelChangePost = (e) => {
     const value = e.target.value;
